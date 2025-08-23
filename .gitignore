@@ -1,0 +1,17 @@
+# Byte-compiled / cached
+__pycache__/
+*.pyc
+
+# Environment files
+.env
+.env.local
+
+# IDEs
+.vscode/
+.idea/
+
+# Output
+all_repos.json
+orgs.json
+contributions.json
+github_output.json
