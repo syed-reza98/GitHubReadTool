@@ -1,38 +1,30 @@
 # saas_ecom
-
-Overview
-
+## Overview
 
 E-commerce Back-end
 
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 
-Code & Notes
+## Code & Repository
 
+- **GitHub:** https://github.com/syed-reza98/saas_ecom
+- **Primary Language:** PHP
+- **Last Updated:** 04/09/2025
+- **Repository Size:** ~5MB
 
-- GitHub: https://github.com/syed-reza98/saas_ecom
+## Architecture & Tech Stack
 
-- Primary language: PHP
+- **Technology Stack:** Laravel Framework
+- **Architecture:** Monolithic Application
 
+## Project Status
 
-Architecture
+- **Status:** ✅ Active
+- **Visibility:** 🌐 Public
 
+## Development Notes
 
-- See README or repo files for architecture specifics.
-
-
-Tech stack
-
-
-- Detected via GitHub metadata: PHP
-
-
-Status
-
-
-- Last pushed: 2025-09-03T22:11:40Z
-
-
-Notes/Usage
-
-
-- Add usage and run instructions here by inspecting repo.
+- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/saas_ecom#readme)
+- Contributing guidelines and project documentation available in the repository

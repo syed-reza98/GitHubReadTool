@@ -1,38 +1,31 @@
 # GitHubReadTool
-
-Overview
-
+## Overview
 
 Toolkit to fetch GitHub Profile Data
 
+Toolkit to fetch GitHub profile data and generate project documentation from repositories.
+This repository contains utilities and documentation to gather a GitHub user's repositories, inspect project metadata (languages, tech stack, architecture notes), and generate per-project markdown summaries that can be embedded into a resume or docs site.
+What I added in this repo
 
-Code & Notes
+## Code & Repository
 
+- **GitHub:** https://github.com/syed-reza98/GitHubReadTool
+- **Primary Language:** HTML
+- **Languages:** HTML (93.3%), JavaScript (6.7%)
+- **Last Updated:** 21/09/2025
+- **Repository Size:** ~0MB
 
-- GitHub: https://github.com/syed-reza98/GitHubReadTool
+## Architecture & Tech Stack
 
-- Primary language: HTML
+- **Technology Stack:** JavaScript/Node.js
+- **Architecture:** REST API
 
+## Project Status
 
-Architecture
+- **Status:** ✅ Active
+- **Visibility:** 🌐 Public
 
+## Development Notes
 
-- See README or repo files for architecture specifics.
-
-
-Tech stack
-
-
-- Detected via GitHub metadata: HTML
-
-
-Status
-
-
-- Last pushed: 2025-09-20T20:52:18Z
-
-
-Notes/Usage
-
-
-- Add usage and run instructions here by inspecting repo.
+- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/GitHubReadTool#readme)
+- Contributing guidelines and project documentation available in the repository

@@ -1,22 +1,29 @@
-# SR600Mini (Embedded POS Terminal Firmware)
+# SR600Mini
+## Overview
 
-Overview
+Linux Application Development for POS Terminal
 
-Firmware for an embedded POS/payment device with dual screens, structured UI, and transaction state handling.
+Linux Application Development for POS Terminal
 
-Code
+## Code & Repository
 
-- Written in C with an embedded UI framework.
-- Implements transaction flows, error handling, and resource-aware display logic.
+- **GitHub:** https://github.com/syed-reza98/SR600Mini
+- **Primary Language:** C
+- **Languages:** C (20.5%), Perl (19.6%), C++ (16.7%), HTML (10.6%), Python (8.8%)
+- **Last Updated:** 17/07/2025
+- **Repository Size:** ~410MB
 
-Architecture
+## Architecture & Tech Stack
 
-- State machine-based UI navigation, low-level hardware drivers for payment peripherals, and secure transaction handling.
+- **Technology Stack:** JavaScript/Node.js, Python, C/C++
+- **Architecture:** Monolithic Application
 
-Tech stack
+## Project Status
 
-- C, Embedded toolchain, Hardware SDKs for payment modules
+- **Status:** ✅ Active
+- **Visibility:** 🌐 Public
 
-Status
+## Development Notes
 
-- Production-ready firmware for specific POS hardware.
+- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/SR600Mini#readme)
+- Contributing guidelines and project documentation available in the repository

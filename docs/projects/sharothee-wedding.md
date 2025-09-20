@@ -1,38 +1,50 @@
 # Sharothee-Wedding
-
-Overview
-
+## Overview
 
 Sharothee Wedding
 
+A comprehensive, bilingual (English & Bengali) wedding website serving as the digital hub for a multi-day wedding celebration. This modern web application provides guests with event information, RSVP management, photo galleries, live streaming, and more.
+## ✨ Features
+### 🔔 Guest Features
 
-Code & Notes
+## Code & Repository
 
+- **GitHub:** https://github.com/syed-reza98/Sharothee-Wedding
+- **Primary Language:** TypeScript
+- **Languages:** TypeScript (89.3%), Shell (6.3%), CSS (2.5%), JavaScript (1.8%), HTML (0.2%)
+- **Stats:** ⭐ 3 stars, 🍴 1 forks
+- **Last Updated:** 28/08/2025
+- **Repository Size:** ~142MB
 
-- GitHub: https://github.com/syed-reza98/Sharothee-Wedding
+## Architecture & Tech Stack
 
-- Primary language: TypeScript
+- **Technology Stack:** JavaScript/Node.js
+- **Architecture:** REST API
 
+## Project Status
 
-Architecture
+- **Status:** ✅ Active
+- **Visibility:** 🌐 Public
+- **Live Demo:** [https://arvinwedsincia.com](https://arvinwedsincia.com)
 
+## Development Notes
 
-- See README or repo files for architecture specifics.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/syed-reza98/Sharothee-Wedding.git
+   cd Sharothee-Wedding/client
+   ```
 
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Tech stack
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Configu...
 
-
-- Detected via GitHub metadata: TypeScript
-
-
-Status
-
-
-- Last pushed: 2025-08-28T15:16:04Z
-
-
-Notes/Usage
-
-
-- Add usage and run instructions here by inspecting repo.
+- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/Sharothee-Wedding#readme)
+- Contributing guidelines and project documentation available in the repository

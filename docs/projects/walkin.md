@@ -1,14 +1,14 @@
-# nsu_ekyc
+# walkin
 ## Overview
 
-Laravel Project
+Hotel Website
 
 ## Code & Repository
 
-- **GitHub:** https://github.com/syed-reza98/nsu_ekyc
-- **Primary Language:** PHP
-- **Last Updated:** 09/11/2021
-- **Repository Size:** ~3MB
+- **GitHub:** https://github.com/syed-reza98/walkin
+- **Primary Language:** CSS
+- **Last Updated:** 05/02/2022
+- **Repository Size:** ~9MB
 
 ## Architecture & Tech Stack
 
@@ -21,5 +21,5 @@ Laravel Project
 
 ## Development Notes
 
-- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/nsu_ekyc#readme)
+- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/walkin#readme)
 - Contributing guidelines and project documentation available in the repository

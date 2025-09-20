@@ -1,14 +1,14 @@
-# nsu_ekyc
+# lamp-app
 ## Overview
 
-Laravel Project
+No description
 
 ## Code & Repository
 
-- **GitHub:** https://github.com/syed-reza98/nsu_ekyc
+- **GitHub:** https://github.com/syed-reza98/lamp-app
 - **Primary Language:** PHP
-- **Last Updated:** 09/11/2021
-- **Repository Size:** ~3MB
+- **Last Updated:** 16/07/2025
+- **Repository Size:** ~2MB
 
 ## Architecture & Tech Stack
 
@@ -21,5 +21,5 @@ Laravel Project
 
 ## Development Notes
 
-- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/nsu_ekyc#readme)
+- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/lamp-app#readme)
 - Contributing guidelines and project documentation available in the repository

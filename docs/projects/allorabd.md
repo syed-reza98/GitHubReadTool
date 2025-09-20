@@ -1,14 +1,14 @@
-# nsu_ekyc
+# allorabd
 ## Overview
 
-Laravel Project
+Laravel + Vue
 
 ## Code & Repository
 
-- **GitHub:** https://github.com/syed-reza98/nsu_ekyc
+- **GitHub:** https://github.com/syed-reza98/allorabd
 - **Primary Language:** PHP
-- **Last Updated:** 09/11/2021
-- **Repository Size:** ~3MB
+- **Last Updated:** 06/05/2025
+- **Repository Size:** ~206MB
 
 ## Architecture & Tech Stack
 
@@ -21,5 +21,5 @@ Laravel Project
 
 ## Development Notes
 
-- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/nsu_ekyc#readme)
+- For detailed setup instructions, refer to the [repository README](https://github.com/syed-reza98/allorabd#readme)
 - Contributing guidelines and project documentation available in the repository
