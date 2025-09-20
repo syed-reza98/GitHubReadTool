@@ -13,18 +13,18 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.4;
-            color: #2c3e50;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.45;
+            color: #1a202c;
             background-color: #ffffff;
-            font-size: 11pt;
+            font-size: 10.5pt;
         }
         
         .container {
             max-width: 210mm; /* A4 width */
             min-height: 297mm; /* A4 height */
             margin: 0 auto;
-            padding: 15mm 20mm;
+            padding: 16mm 18mm;
             background: white;
         }
         
@@ -33,9 +33,9 @@
             display: flex;
             align-items: flex-start;
             gap: 25px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #00ab44;
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #0ea5e9;
         }
         
         .header-content {
@@ -43,17 +43,17 @@
         }
         
         .header-content h1 {
-            font-size: 28pt;
-            color: #00ab44;
-            margin-bottom: 5px;
+            font-size: 26pt;
+            color: #0ea5e9;
+            margin-bottom: 4px;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
         }
         
         .header-content .title {
-            font-size: 14pt;
-            color: #34495e;
-            margin-bottom: 15px;
+            font-size: 13pt;
+            color: #64748b;
+            margin-bottom: 12px;
             font-weight: 500;
         }
         
@@ -75,12 +75,12 @@
             width: 12px;
             margin-right: 6px;
             font-size: 8pt;
-            color: #00ab44;
+            color: #0ea5e9;
             text-align: center;
         }
         
         .contact-item a {
-            color: #00ab44;
+            color: #0ea5e9;
             text-decoration: none;
             font-weight: 500;
         }
@@ -101,11 +101,11 @@
         }
         
         .section h2 {
-            font-size: 16pt;
-            color: #00ab44;
-            margin-bottom: 12px;
-            padding-bottom: 4px;
-            border-bottom: 1px solid #bdc3c7;
+            font-size: 15pt;
+            color: #0ea5e9;
+            margin-bottom: 10px;
+            padding-bottom: 3px;
+            border-bottom: 1.5px solid #cbd5e1;
             font-weight: 600;
         }
         
@@ -240,11 +240,11 @@
         
         .project-tech {
             font-size: 8pt;
-            color: #00ab44;
+            color: #0ea5e9;
             font-weight: 500;
             margin-bottom: 8px;
             padding: 2px 6px;
-            background: #e8f5e8;
+            background: #e0f2fe;
             border-radius: 3px;
             display: inline-block;
         }
@@ -351,27 +351,40 @@
         }
         
         /* PDF Print Styles */
+        @page {
+            size: A4;
+            margin: 16mm 18mm;
+        }
+        
         @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
             body {
                 margin: 0;
                 padding: 0;
-                font-size: 10pt;
-                line-height: 1.3;
+                font-size: 9.5pt;
+                line-height: 1.35;
+                color: #1a202c !important;
             }
             
             .container {
                 max-width: none;
                 margin: 0;
-                padding: 15mm;
+                padding: 0;
                 min-height: auto;
             }
             
             .section {
                 break-inside: avoid;
+                margin-bottom: 14px;
             }
             
             .header {
                 break-after: avoid;
+                margin-bottom: 18px;
             }
             
             .project-card,
@@ -387,33 +400,38 @@
             }
             
             /* Ensure good page breaks */
-            h2 {
+            h1, h2, h3 {
                 break-after: avoid;
+                page-break-after: avoid;
             }
             
             /* Adjust font sizes for print */
             .header-content h1 {
-                font-size: 24pt;
+                font-size: 22pt;
             }
             
             .header-content .title {
-                font-size: 12pt;
+                font-size: 11pt;
             }
             
             .section h2 {
-                font-size: 14pt;
+                font-size: 13pt;
             }
             
-            /* Hide interactive elements in print */
+            /* Link formatting for print */
             a {
-                color: #2c3e50 !important;
+                color: #0ea5e9 !important;
                 text-decoration: none !important;
             }
             
-            .project-links a::after {
+            .project-links a:after {
                 content: " (" attr(href) ")";
                 font-size: 7pt;
-                color: #95a5a6;
+                color: #64748b;
+            }
+            
+            .no-print {
+                display: none !important;
             }
         }
         
@@ -478,16 +496,16 @@
             <h2>Core Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Backend Development</h3>
-                    <p>PHP (Laravel), Python (Flask, Django), Node.js, RESTful APIs, Microservices Architecture</p>
+                    <h3>Languages & Frameworks</h3>
+                    <p>PHP (Laravel), JavaScript/TypeScript (React, Next.js, Vue.js), Python (Flask, Django), C/C++, Node.js</p>
                 </div>
                 <div class="skill-category">
-                    <h3>Frontend Development</h3>
-                    <p>JavaScript, TypeScript, Vue.js, Nuxt.js, Next.js, React, HTML5, CSS3, Tailwind CSS</p>
+                    <h3>Database & Infrastructure</h3>
+                    <p>MySQL, PostgreSQL, Oracle DB, AWS, Docker, CI/CD, RESTful APIs, Microservices</p>
                 </div>
                 <div class="skill-category">
-                    <h3>Database & Cloud</h3>
-                    <p>MySQL, PostgreSQL, Oracle, Database Optimization, AWS, Azure, Docker, CI/CD</p>
+                    <h3>Specialized Systems</h3>
+                    <p>Embedded Systems, POS Terminal Development, Payment Integration, Banking APIs, Real-time Processing</p>
                 </div>
             </div>
         </section>
@@ -529,23 +547,14 @@
         <section class="section">
             <h2>Key Projects & Contributions</h2>
             <div class="projects-intro">
-                <a href="docs/projects/">Complete project documentation available in portfolio</a>
+                <a href="docs/projects/">38+ documented projects available in portfolio</a>
             </div>
             
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>SaaS E-commerce Platform</h3>
-                    <span class="project-tech">PHP, Laravel, MySQL</span>
-                    <p>Multi-tenant e-commerce backend with payment integration, inventory management, and scalable API design for high-performance operations.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/syed-reza98/saas_ecom">GitHub</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
                     <h3>Sharothee Wedding Platform</h3>
-                    <span class="project-tech">TypeScript, Next.js</span>
-                    <p>Full-stack event management system with RSVP handling, media galleries, and admin dashboard. Modern responsive design with real-time features.</p>
+                    <span class="project-tech">TypeScript, Next.js, MySQL</span>
+                    <p>Bilingual wedding management platform with RSVP system, real-time notifications, and media galleries. Deployed at arvinwedsincia.com with 1000+ guest interactions.</p>
                     <div class="project-links">
                         <a href="https://github.com/syed-reza98/Sharothee-Wedding">GitHub</a>
                     </div>
@@ -554,36 +563,45 @@
                 <div class="project-card">
                     <h3>SR600Mini POS Terminal</h3>
                     <span class="project-tech">C, Embedded Systems</span>
-                    <p>Firmware for dual-screen POS device with structured UI, transaction handling, and resource-aware display logic optimized for hardware constraints.</p>
+                    <p>Commercial POS firmware for dual-screen terminals. Optimized transaction processing with structured UI components and memory-efficient display logic (410MB codebase).</p>
                     <div class="project-links">
-                        <a href="docs/projects/sr600mini.md">Details</a>
+                        <a href="https://github.com/syed-reza98/SR600Mini">GitHub</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <h3>NSU eKYC System</h3>
-                    <span class="project-tech">Laravel, MySQL, APIs</span>
-                    <p>Student verification system with API integrations for banks and hospitals. Secure document processing and comprehensive reporting features.</p>
+                    <h3>SaaS E-commerce Backend</h3>
+                    <span class="project-tech">Laravel, MySQL, REST APIs</span>
+                    <p>Multi-tenant e-commerce platform with payment integration, inventory management, and scalable API architecture for high-volume operations.</p>
                     <div class="project-links">
-                        <a href="docs/projects/nsu-ekyc.md">Details</a>
+                        <a href="https://github.com/syed-reza98/saas_ecom">GitHub</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <h3>Walkinroom Hotel System</h3>
-                    <span class="project-tech">Laravel, JavaScript</span>
-                    <p>Commercial hotel booking platform with advanced search, booking management, payment processing, and comprehensive admin features.</p>
+                    <h3>NSU eKYC Verification System</h3>
+                    <span class="project-tech">Laravel, APIs, Security</span>
+                    <p>Student identity verification platform with banking/healthcare API integrations. Secure document processing and compliance reporting features.</p>
                     <div class="project-links">
-                        <a href="docs/projects/walkinroom.md">Details</a>
+                        <a href="https://github.com/syed-reza98/nsu_ekyc">GitHub</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <h3>Digital E-commerce Platform</h3>
-                    <span class="project-tech">PHP, MySQL</span>
-                    <p>Digital product marketplace with user management, payment integration, product catalog, and sales analytics dashboard.</p>
+                    <h3>GitHubReadTool Portfolio Generator</h3>
+                    <span class="project-tech">Node.js, GitHub API</span>
+                    <p>Automated portfolio generation toolkit that analyzes 37+ repositories, filters meaningful contributions, and generates documentation with resume integration.</p>
                     <div class="project-links">
-                        <a href="docs/projects/digital-product-e-commerce.md">Details</a>
+                        <a href="https://github.com/syed-reza98/GitHubReadTool">GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Digital Product Marketplace</h3>
+                    <span class="project-tech">PHP, MySQL, Payment APIs</span>
+                    <p>Full-featured digital marketplace with user management, payment processing, product catalog, and comprehensive analytics dashboard.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/syed-reza98/digital_product_e-commerce">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -648,7 +666,7 @@
             <div class="info-box">
                 <div class="info-row"><strong>Languages:</strong> English (Professional Working Proficiency), Bengali (Native)</div>
                 <div class="info-row"><strong>Technical Interests:</strong> System Architecture, Microservices, Machine Learning, Cloud Computing</div>
-                <div class="info-row"><strong>Portfolio:</strong> 30+ documented projects available at <a href="docs/projects/">docs/projects/</a></div>
+                <div class="info-row"><strong>Portfolio:</strong> 38+ documented projects available at <a href="docs/projects/">docs/projects/</a></div>
                 <div class="info-row"><strong>GitHub Stats:</strong> Active contributor with comprehensive project portfolio and open-source contributions</div>
                 <div class="info-row"><strong>Availability:</strong> Open to senior software engineering opportunities in full-stack and backend development</div>
             </div>
