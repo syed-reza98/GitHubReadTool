@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Resume Builder - GitHubReadTool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-interface {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .input-section, .preview-section {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 8px 25px rgba(86, 171, 47, 0.4);
+        }
+
+        .chat-interface {
+            grid-column: 1 / -1;
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+        }
+
+        .message.user {
+            background: #667eea;
+            color: white;
+            margin-left: auto;
+        }
+
+        .message.assistant {
+            background: #e8f4f8;
+            color: #2c3e50;
+        }
+
+        .message.system {
+            background: #f0f8f0;
+            color: #2d5a3d;
+            font-style: italic;
+            text-align: center;
+            max-width: 100%;
+            margin: 10px 0;
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .resume-preview {
+            max-height: 600px;
+            overflow-y: auto;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fafafa;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e1e8ed;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            padding: 8px 16px;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .step.completed {
+            background: #28a745;
+        }
+
+        .step.current {
+            background: #667eea;
+        }
+
+        .step.pending {
+            background: #6c757d;
+        }
+
+        .export-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .export-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .main-interface {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .export-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .status-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Interactive Resume Builder</h1>
+            <p>AI-Powered Resume Tailoring with GitHub Models Integration</p>
+        </div>
+
+        <div class="progress-steps">
+            <div class="step current" id="step-input">1. Job Input</div>
+            <div class="step pending" id="step-generate">2. Generate</div>
+            <div class="step pending" id="step-edit">3. Edit & Refine</div>
+            <div class="step pending" id="step-export">4. Export</div>
+        </div>
+
+        <div id="status-messages"></div>
+
+        <div class="main-interface">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h2 class="section-title">📝 Job Description Input</h2>
+                
+                <div class="form-group">
+                    <label for="job-title" class="form-label">Job Title</label>
+                    <input type="text" id="job-title" class="form-input" placeholder="e.g., Senior Full Stack Developer">
+                </div>
+
+                <div class="form-group">
+                    <label for="company-name" class="form-label">Company Name (Optional)</label>
+                    <input type="text" id="company-name" class="form-input" placeholder="e.g., Microsoft, Google">
+                </div>
+
+                <div class="form-group">
+                    <label for="job-description" class="form-label">Job Description</label>
+                    <textarea id="job-description" class="form-textarea" 
+                        placeholder="Paste the complete job description here...
+
+Example:
+We are looking for a Senior Full Stack Developer to join our team. The ideal candidate will have:
+• 5+ years of experience with JavaScript, React, Node.js
+• Experience with cloud platforms (AWS, Azure)
+• Strong background in database design
+• Experience with agile development methodologies
+..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="job-file" class="form-label">Or Upload Job Description File</label>
+                    <input type="file" id="job-file" class="form-input" accept=".txt,.md,.pdf,.doc,.docx">
+                </div>
+
+                <button id="generate-resume" class="btn">
+                    🚀 Generate Tailored Resume
+                </button>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="preview-section">
+                <h2 class="section-title">👀 Resume Preview</h2>
+                
+                <div class="loading" id="loading-indicator">
+                    <div class="spinner"></div>
+                    <p>Generating your personalized resume...</p>
+                </div>
+
+                <div id="resume-preview" class="resume-preview">
+                    <p style="text-align: center; color: #666; padding: 40px;">
+                        Your tailored resume will appear here once generated.<br>
+                        <small>Fill in the job description and click "Generate Tailored Resume" to start.</small>
+                    </p>
+                </div>
+
+                <div class="export-section" style="display: none;" id="export-section">
+                    <div class="export-buttons">
+                        <button id="preview-browser" class="btn btn-secondary">
+                            🌐 Browser Preview
+                        </button>
+                        <button id="export-pdf" class="btn">
+                            📄 Export PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="chat-interface" style="display: none;" id="chat-interface">
+            <h2 class="section-title">💬 Conversational Resume Editor</h2>
+            <p style="margin-bottom: 20px; color: #666;">
+                Chat with AI to refine your resume. Try commands like:
+                <em>"Make the summary more concise"</em>, <em>"Add more technical skills"</em>, or 
+                <em>"Highlight my leadership experience"</em>
+            </p>
+
+            <div id="chat-messages" class="chat-messages">
+                <div class="message system">
+                    Chat interface ready. How would you like to improve your resume?
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" class="chat-input" 
+                    placeholder="Type your instruction here... (e.g., 'Make the skills section shorter')"
+                    maxlength="500">
+                <button id="send-message" class="btn">Send</button>
+                <button id="clear-chat" class="btn" style="background: #dc3545;">Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Application State
+        let currentResume = null;
+        let conversationHistory = [];
+        let userProfile = null;
+        let projects = [];
+
+        // DOM Elements
+        const elements = {
+            jobTitle: document.getElementById('job-title'),
+            companyName: document.getElementById('company-name'),
+            jobDescription: document.getElementById('job-description'),
+            jobFile: document.getElementById('job-file'),
+            generateBtn: document.getElementById('generate-resume'),
+            loadingIndicator: document.getElementById('loading-indicator'),
+            resumePreview: document.getElementById('resume-preview'),
+            exportSection: document.getElementById('export-section'),
+            chatInterface: document.getElementById('chat-interface'),
+            chatMessages: document.getElementById('chat-messages'),
+            chatInput: document.getElementById('chat-input'),
+            sendMessageBtn: document.getElementById('send-message'),
+            clearChatBtn: document.getElementById('clear-chat'),
+            previewBtn: document.getElementById('preview-browser'),
+            exportBtn: document.getElementById('export-pdf'),
+            statusMessages: document.getElementById('status-messages'),
+            steps: {
+                input: document.getElementById('step-input'),
+                generate: document.getElementById('step-generate'),
+                edit: document.getElementById('step-edit'),
+                export: document.getElementById('step-export')
+            }
+        };
+
+        // Initialize application
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadUserData();
+            setupEventListeners();
+            showStatusMessage('Ready to create your tailored resume!', 'success');
+        });
+
+        // Load user profile and projects data
+        async function loadUserData() {
+            try {
+                // In a real implementation, these would be API calls
+                userProfile = {
+                    name: 'Syed Salman Reza',
+                    title: 'Software Engineer',
+                    location: 'Dhaka, Bangladesh',
+                    email: 'syedsalmanreza98@gmail.com',
+                    phone: '+880 1755 607998',
+                    github: 'https://github.com/syed-reza98'
+                };
+
+                // Mock projects data (in real app, this would come from the API)
+                projects = [
+                    { name: 'SaaS E-commerce Platform', description: 'Full-stack e-commerce solution', technologies: 'Laravel, MySQL, JavaScript' },
+                    { name: 'Real-time Helmet Detection', description: 'Computer vision safety monitoring', technologies: 'Python, YOLO, OpenCV' },
+                    { name: 'Sharothee Wedding Platform', description: 'Event management system', technologies: 'TypeScript, Next.js, MongoDB' }
+                ];
+            } catch (error) {
+                console.error('Failed to load user data:', error);
+                showStatusMessage('Failed to load user data. Some features may not work properly.', 'warning');
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            elements.generateBtn.addEventListener('click', generateResume);
+            elements.sendMessageBtn.addEventListener('click', sendChatMessage);
+            elements.clearChatBtn.addEventListener('click', clearChat);
+            elements.previewBtn.addEventListener('click', openBrowserPreview);
+            elements.exportBtn.addEventListener('click', exportPDF);
+            elements.jobFile.addEventListener('change', handleFileUpload);
+            
+            // Enter key support for chat
+            elements.chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendChatMessage();
+            });
+
+            // Auto-resize textarea
+            elements.jobDescription.addEventListener('input', autoResize);
+        }
+
+        // Auto-resize textarea
+        function autoResize(e) {
+            e.target.style.height = 'auto';
+            e.target.style.height = e.target.scrollHeight + 'px';
+        }
+
+        // Handle file upload
+        function handleFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                elements.jobDescription.value = e.target.result;
+                autoResize({ target: elements.jobDescription });
+                showStatusMessage('Job description file loaded successfully!', 'success');
+            };
+            reader.readAsText(file);
+        }
+
+        // Generate tailored resume
+        async function generateResume() {
+            const jobTitle = elements.jobTitle.value.trim();
+            const jobDescription = elements.jobDescription.value.trim();
+
+            if (!jobTitle || !jobDescription) {
+                showStatusMessage('Please fill in both job title and description.', 'error');
+                return;
+            }
+
+            setLoading(true);
+            updateStep('generate', 'current');
+
+            try {
+                // Simulate API call to GitHub Models
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                // Generate mock resume (in real app, this would use GitHub Models API)
+                currentResume = generateMockResume(jobTitle, jobDescription);
+                displayResume(currentResume);
+                
+                elements.exportSection.style.display = 'block';
+                elements.chatInterface.style.display = 'block';
+                
+                updateStep('generate', 'completed');
+                updateStep('edit', 'current');
+                
+                showStatusMessage('Resume generated successfully! You can now refine it using the chat interface below.', 'success');
+                
+                // Add initial chat message
+                addChatMessage('system', 'Resume generated successfully! How would you like to improve it?');
+                
+            } catch (error) {
+                console.error('Resume generation failed:', error);
+                showStatusMessage('Failed to generate resume. Please try again.', 'error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // Generate mock resume (placeholder for AI integration)
+        function generateMockResume(jobTitle, jobDescription) {
+            return {
+                personalInfo: {
+                    name: userProfile.name,
+                    title: jobTitle,
+                    email: userProfile.email,
+                    phone: userProfile.phone,
+                    location: userProfile.location,
+                    github: userProfile.github
+                },
+                summary: `Experienced software engineer specializing in full-stack development with ${extractYearsFromJD(jobDescription)} years of experience. Proven track record in building scalable applications and leading development teams. Expertise in ${extractTechnologies(jobDescription)}.`,
+                skills: extractRelevantSkills(jobDescription),
+                projects: selectRelevantProjects(jobDescription),
+                experience: [
+                    {
+                        title: 'Software Engineer',
+                        company: 'Networld Technology Limited',
+                        duration: 'October 2022 - Present',
+                        achievements: [
+                            'Designed microservices-based Reconciliation System improving efficiency by 40%',
+                            'Maintained legacy .NET banking applications reducing downtime by 25%',
+                            'Led full-stack Laravel applications with 99.9% uptime'
+                        ]
+                    }
+                ]
+            };
+        }
+
+        // Extract technologies from job description
+        function extractTechnologies(jobDescription) {
+            const commonTech = ['JavaScript', 'React', 'Node.js', 'Python', 'Java', 'C#', 'PHP', 'Laravel', 'AWS', 'Azure', 'MySQL', 'MongoDB'];
+            const mentioned = commonTech.filter(tech => 
+                jobDescription.toLowerCase().includes(tech.toLowerCase())
+            );
+            return mentioned.slice(0, 5).join(', ') || 'modern web technologies';
+        }
+
+        // Extract years of experience
+        function extractYearsFromJD(jobDescription) {
+            const yearMatch = jobDescription.match(/(\d+)\+?\s*years?/i);
+            return yearMatch ? yearMatch[1] : '5';
+        }
+
+        // Extract relevant skills
+        function extractRelevantSkills(jobDescription) {
+            return {
+                'Programming Languages': ['JavaScript', 'Python', 'PHP', 'C#', 'Java'],
+                'Frontend': ['React', 'Vue.js', 'TypeScript', 'HTML5', 'CSS3'],
+                'Backend': ['Node.js', 'Laravel', 'Flask', '.NET', 'REST APIs'],
+                'Database': ['MySQL', 'MongoDB', 'PostgreSQL', 'Redis'],
+                'Cloud & DevOps': ['AWS', 'Docker', 'CI/CD', 'Git', 'Linux']
+            };
+        }
+
+        // Select relevant projects
+        function selectRelevantProjects(jobDescription) {
+            return projects.slice(0, 6).map(project => ({
+                ...project,
+                relevanceScore: Math.random() * 100
+            })).sort((a, b) => b.relevanceScore - a.relevanceScore);
+        }
+
+        // Display resume in preview
+        function displayResume(resume) {
+            const html = `
+                <div style="max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <header style="text-align: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e1e8ed;">
+                        <h1 style="font-size: 2.2rem; color: #2c3e50; margin-bottom: 5px;">${resume.personalInfo.name}</h1>
+                        <h2 style="font-size: 1.3rem; color: #667eea; margin-bottom: 15px;">${resume.personalInfo.title}</h2>
+                        <div style="color: #666; font-size: 0.95rem;">
+                            📧 ${resume.personalInfo.email} | 📱 ${resume.personalInfo.phone}<br>
+                            📍 ${resume.personalInfo.location} | 🔗 <a href="${resume.personalInfo.github}" style="color: #667eea;">GitHub</a>
+                        </div>
+                    </header>
+
+                    <section style="margin-bottom: 25px;">
+                        <h3 style="color: #2c3e50; font-size: 1.2rem; margin-bottom: 10px; border-left: 3px solid #667eea; padding-left: 10px;">Professional Summary</h3>
+                        <p style="color: #555; line-height: 1.6;">${resume.summary}</p>
+                    </section>
+
+                    <section style="margin-bottom: 25px;">
+                        <h3 style="color: #2c3e50; font-size: 1.2rem; margin-bottom: 10px; border-left: 3px solid #667eea; padding-left: 10px;">Technical Skills</h3>
+                        ${Object.entries(resume.skills).map(([category, skills]) => `
+                            <div style="margin-bottom: 10px;">
+                                <strong style="color: #333;">${category}:</strong> 
+                                <span style="color: #666;">${skills.join(', ')}</span>
+                            </div>
+                        `).join('')}
+                    </section>
+
+                    <section style="margin-bottom: 25px;">
+                        <h3 style="color: #2c3e50; font-size: 1.2rem; margin-bottom: 10px; border-left: 3px solid #667eea; padding-left: 10px;">Selected Projects</h3>
+                        ${resume.projects.map(project => `
+                            <div style="margin-bottom: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                                <h4 style="color: #2c3e50; margin-bottom: 5px;">${project.name}</h4>
+                                <div style="color: #667eea; font-size: 0.9rem; margin-bottom: 5px;">${project.technologies}</div>
+                                <p style="color: #555; font-size: 0.95rem;">${project.description}</p>
+                            </div>
+                        `).join('')}
+                    </section>
+
+                    <section>
+                        <h3 style="color: #2c3e50; font-size: 1.2rem; margin-bottom: 10px; border-left: 3px solid #667eea; padding-left: 10px;">Professional Experience</h3>
+                        ${resume.experience.map(exp => `
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <h4 style="color: #2c3e50;">${exp.title}</h4>
+                                    <span style="color: #666; font-size: 0.9rem;">${exp.duration}</span>
+                                </div>
+                                <div style="color: #667eea; margin-bottom: 8px; font-weight: 500;">${exp.company}</div>
+                                <ul style="color: #555; margin-left: 20px;">
+                                    ${exp.achievements.map(achievement => `<li style="margin-bottom: 4px;">${achievement}</li>`).join('')}
+                                </ul>
+                            </div>
+                        `).join('')}
+                    </section>
+                </div>
+            `;
+            
+            elements.resumePreview.innerHTML = html;
+        }
+
+        // Send chat message for resume editing
+        async function sendChatMessage() {
+            const message = elements.chatInput.value.trim();
+            if (!message || !currentResume) return;
+
+            addChatMessage('user', message);
+            elements.chatInput.value = '';
+
+            try {
+                // Simulate AI processing
+                addChatMessage('system', 'Processing your request...');
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Simulate AI response (in real app, this would call GitHub Models API)
+                const response = generateMockChatResponse(message);
+                
+                // Remove "processing" message
+                const messages = elements.chatMessages.querySelectorAll('.message');
+                messages[messages.length - 1].remove();
+
+                addChatMessage('assistant', response.message);
+                
+                if (response.updatedResume) {
+                    currentResume = response.updatedResume;
+                    displayResume(currentResume);
+                    showStatusMessage('Resume updated successfully!', 'success');
+                }
+
+                updateStep('edit', 'completed');
+                updateStep('export', 'current');
+                
+            } catch (error) {
+                console.error('Chat message failed:', error);
+                addChatMessage('system', 'Sorry, there was an error processing your request. Please try again.');
+            }
+        }
+
+        // Generate mock chat response
+        function generateMockChatResponse(message) {
+            const responses = {
+                'concise': 'I\'ve made the summary more concise while keeping the key achievements.',
+                'skills': 'I\'ve reorganized the skills section to better highlight your technical expertise.',
+                'leadership': 'I\'ve emphasized your leadership experience and team management skills.',
+                'projects': 'I\'ve updated the projects section to better showcase your most relevant work.',
+                'default': 'I\'ve reviewed your request and made appropriate improvements to your resume.'
+            };
+
+            let responseType = 'default';
+            if (message.toLowerCase().includes('concise') || message.toLowerCase().includes('shorter')) {
+                responseType = 'concise';
+            } else if (message.toLowerCase().includes('skill')) {
+                responseType = 'skills';
+            } else if (message.toLowerCase().includes('leadership') || message.toLowerCase().includes('lead')) {
+                responseType = 'leadership';
+            } else if (message.toLowerCase().includes('project')) {
+                responseType = 'projects';
+            }
+
+            return {
+                message: responses[responseType],
+                updatedResume: currentResume // In real app, this would be the modified resume
+            };
+        }
+
+        // Add message to chat
+        function addChatMessage(role, message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+            messageDiv.textContent = message;
+            
+            elements.chatMessages.appendChild(messageDiv);
+            elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
+            
+            conversationHistory.push({ role, content: message, timestamp: new Date().toISOString() });
+        }
+
+        // Clear chat history
+        function clearChat() {
+            elements.chatMessages.innerHTML = '<div class="message system">Chat cleared. How would you like to improve your resume?</div>';
+            conversationHistory = [];
+        }
+
+        // Open browser preview
+        function openBrowserPreview() {
+            if (!currentResume) {
+                showStatusMessage('Please generate a resume first.', 'warning');
+                return;
+            }
+
+            const previewWindow = window.open('', '_blank', 'width=1000,height=800');
+            const resumeHTML = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Resume Preview - ${currentResume.personalInfo.name}</title>
+                    <style>
+                        body { font-family: 'Segoe UI', sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; }
+                        .print-btn { position: fixed; top: 20px; right: 20px; background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
+                        @media print { .print-btn { display: none; } }
+                    </style>
+                </head>
+                <body>
+                    <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+                    ${elements.resumePreview.innerHTML}
+                </body>
+                </html>
+            `;
+            
+            previewWindow.document.write(resumeHTML);
+            previewWindow.document.close();
+        }
+
+        // Export PDF
+        async function exportPDF() {
+            if (!currentResume) {
+                showStatusMessage('Please generate a resume first.', 'warning');
+                return;
+            }
+
+            showStatusMessage('Generating PDF... This may take a moment.', 'success');
+
+            try {
+                // In a real implementation, this would call a backend service to generate PDF
+                // For now, we'll simulate the process and provide instructions
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                const link = document.createElement('a');
+                link.href = '#';
+                link.download = 'SyedSalmanRezaResume_Tailored.pdf';
+                
+                showStatusMessage('PDF generation complete! In a real implementation, the file would be downloaded automatically. For now, use the browser preview and print to PDF.', 'success');
+                
+                // Open print dialog as a fallback
+                openBrowserPreview();
+                setTimeout(() => {
+                    // The preview window would trigger print dialog
+                }, 1000);
+                
+            } catch (error) {
+                console.error('PDF export failed:', error);
+                showStatusMessage('Failed to export PDF. Please try the browser preview instead.', 'error');
+            }
+        }
+
+        // Update progress step
+        function updateStep(stepId, status) {
+            const step = elements.steps[stepId];
+            if (step) {
+                step.className = `step ${status}`;
+            }
+        }
+
+        // Set loading state
+        function setLoading(isLoading) {
+            if (isLoading) {
+                elements.loadingIndicator.classList.add('show');
+                elements.resumePreview.style.display = 'none';
+                elements.generateBtn.disabled = true;
+                elements.generateBtn.textContent = 'Generating...';
+            } else {
+                elements.loadingIndicator.classList.remove('show');
+                elements.resumePreview.style.display = 'block';
+                elements.generateBtn.disabled = false;
+                elements.generateBtn.textContent = '🚀 Generate Tailored Resume';
+            }
+        }
+
+        // Show status message
+        function showStatusMessage(message, type = 'info') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `status-message status-${type}`;
+            messageDiv.textContent = message;
+            
+            elements.statusMessages.appendChild(messageDiv);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+            
+            // Scroll to message
+            messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
