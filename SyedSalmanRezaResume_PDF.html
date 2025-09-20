@@ -13,29 +13,32 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.45;
-            color: #1a202c;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.4;
+            color: #1a1a1a;
             background-color: #ffffff;
-            font-size: 10.5pt;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
         }
         
         .container {
             max-width: 210mm; /* A4 width */
             min-height: 297mm; /* A4 height */
             margin: 0 auto;
-            padding: 16mm 18mm;
+            padding: 12mm 15mm;
             background: white;
         }
         
-        /* Header Section - Optimized for PDF */
+        /* Header Section - Optimized for Space */
         .header {
             display: flex;
             align-items: flex-start;
-            gap: 25px;
-            margin-bottom: 22px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid #0ea5e9;
+            gap: 20px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #2563eb;
+            position: relative;
         }
         
         .header-content {
@@ -43,26 +46,28 @@
         }
         
         .header-content h1 {
-            font-size: 26pt;
-            color: #0ea5e9;
-            margin-bottom: 4px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
+            font-size: 24pt;
+            color: #1e40af;
+            margin-bottom: 2px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1;
         }
         
         .header-content .title {
-            font-size: 13pt;
-            color: #64748b;
-            margin-bottom: 12px;
-            font-weight: 500;
+            font-size: 12pt;
+            color: #374151;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.1;
         }
         
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px 25px;
-            font-size: 9.5pt;
-            color: #7f8c8d;
+            gap: 4px 20px;
+            font-size: 9pt;
+            color: #4b5563;
         }
         
         .contact-item {
@@ -72,268 +77,283 @@
         }
         
         .contact-item .icon {
-            width: 12px;
-            margin-right: 6px;
-            font-size: 8pt;
-            color: #0ea5e9;
+            width: 10px;
+            margin-right: 5px;
+            font-size: 7pt;
+            color: #2563eb;
             text-align: center;
         }
         
         .contact-item a {
-            color: #0ea5e9;
+            color: #2563eb;
             text-decoration: none;
             font-weight: 500;
         }
         
         .profile-image {
-            width: 110px;
-            height: 110px;
-            border-radius: 8px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ecf0f1;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 3px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             flex-shrink: 0;
         }
         
-        /* Section Styles */
+        /* Section Styles - Compact */
         .section {
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
         
         .section h2 {
-            font-size: 15pt;
-            color: #0ea5e9;
-            margin-bottom: 10px;
-            padding-bottom: 3px;
-            border-bottom: 1.5px solid #cbd5e1;
-            font-weight: 600;
-        }
-        
-        /* Professional Summary */
-        .summary p {
-            font-size: 10.5pt;
-            line-height: 1.5;
-            color: #34495e;
-            text-align: justify;
+            font-size: 14pt;
+            color: #1e40af;
             margin-bottom: 8px;
+            padding-bottom: 2px;
+            border-bottom: 1px solid #d1d5db;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
-        /* Skills - Compact Grid */
+        /* Professional Summary - Compact */
+        .summary p {
+            font-size: 9.5pt;
+            line-height: 1.4;
+            color: #374151;
+            text-align: justify;
+            margin-bottom: 6px;
+        }
+        
+        /* Skills - More Compact Grid */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         
         .skill-category {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 6px;
-            border-left: 3px solid #00ab44;
+            background: #f9fafb;
+            padding: 8px 10px;
+            border-radius: 4px;
+            border-left: 3px solid #2563eb;
         }
         
         .skill-category h3 {
-            font-size: 10pt;
-            color: #2c3e50;
-            margin-bottom: 6px;
-            font-weight: 600;
+            font-size: 9pt;
+            color: #111827;
+            margin-bottom: 4px;
+            font-weight: 700;
         }
         
         .skill-category p {
-            color: #7f8c8d;
-            font-size: 9pt;
+            color: #4b5563;
+            font-size: 8pt;
             line-height: 1.3;
         }
         
-        /* Experience - Compact Layout */
+        /* Experience - Ultra Compact Layout */
         .experience-item {
-            margin-bottom: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border-left: 3px solid #00ab44;
+            margin-bottom: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
             break-inside: avoid;
         }
         
+        .experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
         .experience-header {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .experience-header h3 {
-            font-size: 12pt;
-            color: #2c3e50;
-            margin-bottom: 3px;
-            font-weight: 600;
+            font-size: 11pt;
+            color: #111827;
+            margin-bottom: 2px;
+            font-weight: 700;
         }
         
         .experience-header .company {
-            font-size: 10pt;
-            color: #7f8c8d;
-            margin-bottom: 4px;
+            font-size: 9pt;
+            color: #2563eb;
+            margin-bottom: 1px;
+            font-weight: 600;
         }
         
         .experience-header .duration {
-            font-size: 9pt;
-            color: #95a5a6;
+            font-size: 8pt;
+            color: #6b7280;
             font-weight: 500;
         }
         
         .experience-item ul {
             list-style: none;
-            margin-top: 8px;
+            margin-top: 6px;
+            padding-left: 0;
         }
         
         .experience-item li {
-            margin-bottom: 4px;
-            padding-left: 15px;
+            margin-bottom: 3px;
+            padding-left: 12px;
             position: relative;
-            color: #34495e;
-            font-size: 9.5pt;
-            line-height: 1.4;
+            color: #374151;
+            font-size: 9pt;
+            line-height: 1.35;
         }
         
         .experience-item li:before {
-            content: "•";
-            color: #00ab44;
+            content: "▪";
+            color: #2563eb;
             position: absolute;
             left: 0;
             font-weight: bold;
+            font-size: 10pt;
         }
         
-        /* Projects - Two Column Layout */
+        /* Projects - Compact Two Column Layout */
         .projects-intro {
-            font-size: 9.5pt;
-            color: #7f8c8d;
-            margin-bottom: 15px;
+            font-size: 8.5pt;
+            color: #6b7280;
+            margin-bottom: 10px;
             text-align: center;
         }
         
         .projects-intro a {
-            color: #00ab44;
+            color: #2563eb;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .projects-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
         
         .project-card {
             background: #ffffff;
-            border: 1px solid #bdc3c7;
-            border-radius: 6px;
-            padding: 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 4px;
+            padding: 8px;
             break-inside: avoid;
+            border-left: 3px solid #2563eb;
         }
         
         .project-card h3 {
-            font-size: 10.5pt;
-            color: #2c3e50;
-            margin-bottom: 4px;
-            font-weight: 600;
-            line-height: 1.2;
+            font-size: 9.5pt;
+            color: #111827;
+            margin-bottom: 3px;
+            font-weight: 700;
+            line-height: 1.1;
         }
         
         .project-tech {
-            font-size: 8pt;
-            color: #0ea5e9;
-            font-weight: 500;
-            margin-bottom: 8px;
-            padding: 2px 6px;
-            background: #e0f2fe;
-            border-radius: 3px;
+            font-size: 7pt;
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 6px;
+            padding: 1px 4px;
+            background: #dbeafe;
+            border-radius: 2px;
             display: inline-block;
         }
         
         .project-card p {
-            color: #7f8c8d;
-            font-size: 8.5pt;
-            line-height: 1.3;
-            margin-bottom: 8px;
+            color: #4b5563;
+            font-size: 8pt;
+            line-height: 1.25;
+            margin-bottom: 6px;
         }
         
         .project-links {
-            font-size: 8pt;
+            font-size: 7pt;
         }
         
         .project-links a {
-            color: #00ab44;
+            color: #2563eb;
             text-decoration: none;
-            font-weight: 500;
-            margin-right: 10px;
+            font-weight: 600;
+            margin-right: 8px;
         }
         
-        /* Education - Compact */
+        /* Education - Ultra Compact */
         .education-item {
-            margin-bottom: 12px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
+            margin-bottom: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f3f4f6;
             break-inside: avoid;
         }
         
+        .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
         .education-item h3 {
-            font-size: 10.5pt;
-            color: #2c3e50;
-            margin-bottom: 3px;
-            font-weight: 600;
+            font-size: 10pt;
+            color: #111827;
+            margin-bottom: 2px;
+            font-weight: 700;
         }
         
         .education-item .institution {
-            font-size: 9.5pt;
-            color: #7f8c8d;
-            margin-bottom: 2px;
+            font-size: 8.5pt;
+            color: #2563eb;
+            margin-bottom: 1px;
+            font-weight: 600;
         }
         
         .education-item .duration {
-            font-size: 8.5pt;
-            color: #95a5a6;
+            font-size: 7.5pt;
+            color: #6b7280;
+            font-weight: 500;
         }
         
-        /* Certifications - Grid */
+        /* Certifications - Compact Grid */
         .cert-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 6px;
         }
         
         .cert-item {
-            padding: 8px;
-            background: #ffffff;
-            border: 1px solid #ecf0f1;
-            border-radius: 4px;
+            padding: 6px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 3px;
             break-inside: avoid;
         }
         
         .cert-item .cert-name {
-            color: #2c3e50;
-            font-weight: 500;
+            color: #111827;
+            font-weight: 600;
             margin-bottom: 2px;
-            font-size: 9pt;
+            font-size: 8pt;
             line-height: 1.2;
         }
         
         .cert-item .cert-details {
-            color: #95a5a6;
-            font-size: 8pt;
+            color: #6b7280;
+            font-size: 7pt;
         }
         
-        /* Additional Info */
+        /* Additional Info - Compact */
         .info-box {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 6px;
-            border-left: 3px solid #00ab44;
-            margin-top: 10px;
+            background: #f9fafb;
+            padding: 8px;
+            border-radius: 4px;
+            border-left: 3px solid #2563eb;
+            margin-top: 8px;
         }
         
         .info-row {
-            margin-bottom: 6px;
-            font-size: 9.5pt;
+            margin-bottom: 4px;
+            font-size: 8.5pt;
         }
         
         .info-row:last-child {
@@ -341,19 +361,19 @@
         }
         
         .info-row strong {
-            color: #2c3e50;
+            color: #111827;
         }
         
         .info-row a {
-            color: #00ab44;
+            color: #2563eb;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        /* PDF Print Styles */
+        /* PDF Print Styles - Maximum Space Utilization */
         @page {
             size: A4;
-            margin: 16mm 18mm;
+            margin: 10mm 12mm;
         }
         
         @media print {
@@ -365,9 +385,9 @@
             body {
                 margin: 0;
                 padding: 0;
-                font-size: 9.5pt;
-                line-height: 1.35;
-                color: #1a202c !important;
+                font-size: 9pt;
+                line-height: 1.3;
+                color: #1a1a1a !important;
             }
             
             .container {
@@ -379,12 +399,13 @@
             
             .section {
                 break-inside: avoid;
-                margin-bottom: 14px;
+                margin-bottom: 10px;
             }
             
             .header {
                 break-after: avoid;
-                margin-bottom: 18px;
+                margin-bottom: 12px;
+                border-bottom: 2px solid #2563eb !important;
             }
             
             .project-card,
@@ -405,33 +426,57 @@
                 page-break-after: avoid;
             }
             
-            /* Adjust font sizes for print */
+            /* Optimize font sizes for print */
             .header-content h1 {
-                font-size: 22pt;
+                font-size: 20pt !important;
             }
             
             .header-content .title {
-                font-size: 11pt;
+                font-size: 10pt !important;
             }
             
             .section h2 {
-                font-size: 13pt;
+                font-size: 12pt !important;
+                color: #1e40af !important;
+            }
+            
+            .contact-grid {
+                font-size: 8pt !important;
+            }
+            
+            .profile-image {
+                width: 70px !important;
+                height: 70px !important;
+                border: 2px solid #d1d5db !important;
             }
             
             /* Link formatting for print */
             a {
-                color: #0ea5e9 !important;
+                color: #2563eb !important;
                 text-decoration: none !important;
             }
             
             .project-links a:after {
-                content: " (" attr(href) ")";
-                font-size: 7pt;
-                color: #64748b;
+                content: "";
+                font-size: 0pt;
             }
             
             .no-print {
                 display: none !important;
+            }
+            
+            /* Ensure color preservation */
+            .skill-category {
+                border-left: 3px solid #2563eb !important;
+                background: #f9fafb !important;
+            }
+            
+            .project-card {
+                border-left: 3px solid #2563eb !important;
+            }
+            
+            .experience-item li:before {
+                color: #2563eb !important;
             }
         }
         
@@ -649,26 +694,30 @@
 
         <!-- Professional Activities & Additional Information -->
         <section class="section">
-            <h2>Professional Activities & Additional Information</h2>
+            <h2>Additional Information</h2>
             
-            <div class="experience-item">
-                <div class="experience-header">
-                    <h3>Senior Member - ACM Student Chapter</h3>
-                    <p class="company">North South University Operations</p>
-                    <p class="duration">March 2018 - November 2021</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <div class="experience-item" style="margin-bottom: 10px;">
+                        <div class="experience-header">
+                            <h3>Senior Member - ACM Student Chapter</h3>
+                            <p class="company">North South University Operations</p>
+                            <p class="duration">March 2018 - November 2021</p>
+                        </div>
+                        <ul>
+                            <li>Organized technical events, workshops, and programming competitions for 200+ students</li>
+                            <li>Mentored junior students in programming and software development best practices</li>
+                        </ul>
+                    </div>
                 </div>
-                <ul>
-                    <li>Organized technical events, workshops, and programming competitions for 200+ students</li>
-                    <li>Mentored junior students in programming and software development best practices</li>
-                </ul>
-            </div>
-            
-            <div class="info-box">
-                <div class="info-row"><strong>Languages:</strong> English (Professional Working Proficiency), Bengali (Native)</div>
-                <div class="info-row"><strong>Technical Interests:</strong> System Architecture, Microservices, Machine Learning, Cloud Computing</div>
-                <div class="info-row"><strong>Portfolio:</strong> 38+ documented projects available at <a href="docs/projects/">docs/projects/</a></div>
-                <div class="info-row"><strong>GitHub Stats:</strong> Active contributor with comprehensive project portfolio and open-source contributions</div>
-                <div class="info-row"><strong>Availability:</strong> Open to senior software engineering opportunities in full-stack and backend development</div>
+                
+                <div class="info-box" style="margin-top: 0;">
+                    <div class="info-row"><strong>Languages:</strong> English (Professional), Bengali (Native)</div>
+                    <div class="info-row"><strong>Interests:</strong> System Architecture, Microservices, ML, Cloud Computing</div>
+                    <div class="info-row"><strong>Portfolio:</strong> 38+ projects at <a href="docs/projects/">docs/projects/</a></div>
+                    <div class="info-row"><strong>GitHub:</strong> Active contributor with comprehensive portfolio</div>
+                    <div class="info-row"><strong>Status:</strong> Open to senior software engineering opportunities</div>
+                </div>
             </div>
         </section>
     </div>
