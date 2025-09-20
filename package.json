@@ -1,0 +1,16 @@
+{
+  "name": "githubreadtool",
+  "version": "0.1.0",
+  "description": "Small toolkit to generate per-repository markdown summaries for a GitHub profile",
+  "type": "module",
+  "bin": {
+    "generate-docs": "./scripts/generate_docs.js"
+  },
+  "scripts": {
+    "generate-docs": "node ./scripts/generate_docs.js",
+    "help": "node ./scripts/generate_docs.js --help"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
