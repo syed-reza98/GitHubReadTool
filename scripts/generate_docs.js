@@ -39,7 +39,7 @@ function ghGet(pathname) {
     hostname: 'api.github.com',
     path: pathname,
     method: 'GET',
-    headers: { 'User-Agent': 'githubreadtool' }
+    headers: { 'User-Agent': 'githubreadtool', 'Accept': 'application/vnd.github.v3+json' }
   };
   if (GITHUB_TOKEN) options.headers['Authorization'] = `token ${GITHUB_TOKEN}`;
 
@@ -51,6 +51,8 @@ function ghGet(pathname) {
         if (res.statusCode >= 200 && res.statusCode < 300) {
           try { resolve(JSON.parse(data)); }
           catch(e){ reject(e); }
+        } else if (res.statusCode === 404) {
+          resolve(null);
         } else {
           reject(new Error(`GitHub API ${res.statusCode}: ${data}`));
         }
@@ -63,8 +65,42 @@ function ghGet(pathname) {
 
 async function run() {
   try {
-    console.log(`Fetching public repos for ${user}...`);
-    const repos = await ghGet(`/users/${user}/repos?per_page=${limit}&sort=updated`);
+    let repos = [];
+    console.log(`Fetching repositories for ${user}...`);
+
+    // If a token is present, try to detect authenticated user and use /user/repos to include private/collaborator repos.
+    let authUser = null;
+    if (GITHUB_TOKEN) {
+      const me = await ghGet(`/user`);
+      if (me && me.login) {
+        authUser = me.login;
+        console.log(`Authenticated as ${authUser}`);
+      }
+    }
+
+    // If authenticated and requested user matches auth user, fetch /user/repos with affiliation to include owner/collaborator/org repos.
+    if (GITHUB_TOKEN && authUser && authUser.toLowerCase() === user.toLowerCase()) {
+      // paginate until we have 'limit' repos or no more
+      let page = 1;
+      while (repos.length < limit) {
+        const batch = await ghGet(`/user/repos?per_page=100&page=${page}&affiliation=owner,collaborator,organization_member&sort=updated`);
+        if (!batch || batch.length === 0) break;
+        repos = repos.concat(batch);
+        page++;
+      }
+      repos = repos.slice(0, limit);
+    } else {
+      // fallback: fetch public repos for the given user (may be unauthenticated)
+      let page = 1;
+      while (repos.length < limit) {
+        const batch = await ghGet(`/users/${user}/repos?per_page=100&page=${page}&sort=updated`);
+        if (!batch || batch.length === 0) break;
+        repos = repos.concat(batch);
+        page++;
+      }
+      repos = repos.slice(0, limit);
+    }
+
     for (const r of repos) {
       const name = r.name;
       console.log(`- Processing ${name} (${r.language || 'unknown'})`);
@@ -88,7 +124,16 @@ async function run() {
       md.push(`${shortDesc}\n\n`);
       md.push('Code & Notes\n\n');
       md.push(`- GitHub: https://github.com/${user}/${name}\n`);
-      md.push(`- Primary language: ${r.language || 'unknown'}\n`);
+      // try to fetch languages endpoint for more accurate detection
+      let lang = r.language || 'unknown';
+      try {
+        const langs = await ghGet(`/repos/${user}/${name}/languages`);
+        if (langs) {
+          const top = Object.keys(langs).sort((a,b)=>langs[b]-langs[a])[0];
+          if (top) lang = top;
+        }
+      } catch(e){}
+      md.push(`- Primary language: ${lang}\n`);
       md.push('\nArchitecture\n\n');
       md.push('- See README or repo files for architecture specifics.\n\n');
       md.push('Tech stack\n\n');

@@ -1,17 +1,17 @@
-# agent-os
+# hostinger-deploy
 
 Overview
 
 
-Agent OS is a system for better planning and executing software development tasks with your AI agents.
+A composite GitHub Action to streamline and automate the deployment of your site to Hostinger.
 
 
 Code & Notes
 
 
-- GitHub: https://github.com/syed-reza98/agent-os
+- GitHub: https://github.com/syed-reza98/hostinger-deploy
 
-- Primary language: Shell
+- Primary language: unknown
 
 
 Architecture
@@ -29,7 +29,7 @@ Tech stack
 Status
 
 
-- Last pushed: 2025-09-05T20:11:47Z
+- Last pushed: 2024-11-17T17:05:52Z
 
 
 Notes/Usage

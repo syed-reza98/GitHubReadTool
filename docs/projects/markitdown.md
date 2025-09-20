@@ -11,7 +11,7 @@ Code & Notes
 
 - GitHub: https://github.com/syed-reza98/markitdown
 
-- Primary language: unknown
+- Primary language: Python
 
 
 Architecture

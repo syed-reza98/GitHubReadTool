@@ -1,15 +1,15 @@
-# Sharothee-Wedding
+# docs
 
 Overview
 
 
-Sharothee Wedding
+The open-source repo for docs.github.com
 
 
 Code & Notes
 
 
-- GitHub: https://github.com/syed-reza98/Sharothee-Wedding
+- GitHub: https://github.com/syed-reza98/docs
 
 - Primary language: TypeScript
 
@@ -23,13 +23,13 @@ Architecture
 Tech stack
 
 
-- Detected via GitHub metadata: TypeScript
+- Detected via GitHub metadata: unknown
 
 
 Status
 
 
-- Last pushed: 2025-08-28T15:16:04Z
+- Last pushed: 2025-09-08T21:20:40Z
 
 
 Notes/Usage

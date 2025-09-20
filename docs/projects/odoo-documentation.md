@@ -1,17 +1,17 @@
-# agent-os
+# odoo-documentation
 
 Overview
 
 
-Agent OS is a system for better planning and executing software development tasks with your AI agents.
+Odoo documentation sources
 
 
 Code & Notes
 
 
-- GitHub: https://github.com/syed-reza98/agent-os
+- GitHub: https://github.com/syed-reza98/odoo-documentation
 
-- Primary language: Shell
+- Primary language: reStructuredText
 
 
 Architecture
@@ -29,7 +29,7 @@ Tech stack
 Status
 
 
-- Last pushed: 2025-09-05T20:11:47Z
+- Last pushed: 2025-09-07T22:10:56Z
 
 
 Notes/Usage
