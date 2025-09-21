@@ -111,42 +111,6 @@ export class GitHubModels {
       return this.generateMockResume(jobDescription, userProfile, projects);
     }
   }
-    
-    const prompt = `
-Job Description:
-${jobDescription}
-
-User Profile:
-${JSON.stringify(userProfile, null, 2)}
-
-Available Projects:
-${projects.map(p => `- ${p.name}: ${p.description} (${p.technologies})`).join('\n')}
-
-Please generate a tailored resume that:
-1. Emphasizes relevant skills and experience from the job description
-2. Selects the most relevant projects (6-8 maximum)
-3. Crafts a professional summary that aligns with the role
-4. Organizes content for maximum impact and ATS compatibility
-5. Uses measurable achievements where possible
-
-Return the response as structured JSON with sections for summary, skills, projects, and experience.
-`;
-
-    try {
-      const response = await this.makeRequest('/v1/completions', {
-        model: this.model,
-        prompt: prompt,
-        system: systemPrompt,
-        temperature: this.temperature,
-        max_tokens: this.maxTokens
-      });
-
-      return this.parseResumeResponse(response);
-    } catch (error) {
-      console.error('Resume generation failed:', error.message);
-      throw error;
-    }
-  }
 
   /**
    * Edit existing resume content based on user instructions
