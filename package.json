@@ -1,6 +1,6 @@
 {
   "name": "githubreadtool",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Interactive GitHub Portfolio & Resume Generator with AI-powered tailoring using GitHub Models",
   "type": "module",
   "main": "resume-server.js",
@@ -14,11 +14,26 @@
     "setup": "node scripts/setup.js",
     "generate-docs": "node ./scripts/generate_docs.js",
     "build-resume": "node scripts/build-resume.js",
+    "test": "node --test tests/**/*.test.js",
+    "test:unit": "node --test tests/unit/**/*.test.js",
+    "test:integration": "node --test tests/integration/**/*.test.js",
+    "test:e2e": "node --test tests/e2e/**/*.test.js",
+    "test:watch": "node --test --watch tests/**/*.test.js",
+    "lint": "echo 'Linting with built-in Node.js rules...' && node --check *.js scripts/*.js models/*.js",
+    "format": "echo 'Code formatting would be handled by prettier if installed'",
+    "validate": "npm run lint && npm run test",
+    "build": "echo 'Build process - copying static files...' && mkdir -p dist && cp -r public dist/ && cp *.html dist/",
+    "clean": "rm -rf dist/ coverage/ .nyc_output/ logs/",
     "help": "node ./scripts/generate_docs.js --help",
-    "demo": "echo '🚀 Starting demo server...' && npm start"
+    "demo": "echo '🚀 Starting demo server...' && npm start",
+    "health-check": "curl -f http://localhost:3000/api/health || exit 1",
+    "docs:serve": "echo 'Serving documentation...' && python3 -m http.server 8080 --directory docs/",
+    "preinstall": "node scripts/check-node-version.js",
+    "postinstall": "echo '✅ GitHubReadTool installed successfully! Run npm run setup to get started.'"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   },
   "dependencies": {
     "dotenv": "^16.0.0"
@@ -32,12 +47,40 @@
     "github-models",
     "pdf",
     "job-application",
-    "tailoring"
+    "tailoring",
+    "cv-generator",
+    "career-tools",
+    "automated-documentation",
+    "professional-development"
   ],
-  "author": "Syed Salman Reza",
+  "author": {
+    "name": "Syed Salman Reza",
+    "email": "syedreza.cse98@gmail.com",
+    "url": "https://github.com/syed-reza98"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/syed-reza98/GitHubReadTool.git"
+  },
+  "bugs": {
+    "url": "https://github.com/syed-reza98/GitHubReadTool/issues"
+  },
+  "homepage": "https://github.com/syed-reza98/GitHubReadTool#readme",
+  "files": [
+    "*.js",
+    "*.html",
+    "scripts/",
+    "models/",
+    "src/",
+    "public/",
+    "docs/",
+    "prompts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "config": {
+    "port": 3000,
+    "host": "localhost"
   }
 }
