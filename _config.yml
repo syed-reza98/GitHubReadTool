@@ -1,0 +1,35 @@
+# GitHub Pages Configuration
+
+# Enable GitHub Pages
+domain: "syed-reza98.github.io"
+
+# Theme
+theme: minima
+
+# Plugins
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+
+# Settings
+relative_links:
+  enabled: true
+  collections: true
+
+# Include HTML files
+include:
+  - "interactive-resume-builder.html"
+  - "index.html"
+
+# Exclude
+exclude:
+  - node_modules/
+  - .env
+  - resume-server.js
+  - package.json
+  - package-lock.json
+
+# Repository settings
+repository: syed-reza98/GitHubReadTool
+github:
+  repository_url: https://github.com/syed-reza98/GitHubReadTool

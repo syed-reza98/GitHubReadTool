@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive AI Resume Builder - GitHub Pages</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px 20px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .feature {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        .feature h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        .cta-buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-primary {
+            background: #00ab44;
+            color: white;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+        .note {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .features { grid-template-columns: 1fr; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤖 AI-Powered Resume Builder</h1>
+        <p class="subtitle">Create tailored resumes that get you hired using advanced AI and GitHub Models integration</p>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">✨</div>
+                <h3>AI-Powered Generation</h3>
+                <p>Automatically generates resumes tailored to specific job descriptions using advanced language models</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💬</div>
+                <h3>Conversational Editing</h3>
+                <p>Refine your resume through natural language chat. Just say "make it more concise" or "add leadership skills"</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎨</div>
+                <h3>Professional Design</h3>
+                <p>Beautiful, ATS-friendly templates with multiple themes and responsive design for all devices</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📄</div>
+                <h3>Export Ready</h3>
+                <p>Export as PDF optimized for printing and job applications, or preview in browser</p>
+            </div>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="interactive-resume-builder.html" class="btn btn-primary">
+                🚀 Launch Resume Builder
+            </a>
+            <a href="https://github.com/syed-reza98/GitHubReadTool" class="btn btn-secondary" target="_blank">
+                📚 View on GitHub
+            </a>
+        </div>
+
+        <div class="note">
+            <strong>Note:</strong> This is a static GitHub Pages deployment running in demo mode. 
+            For full AI integration, clone the repository and run locally with your GitHub Models token.
+            <br><br>
+            <strong>Features available in demo mode:</strong> Complete UI/UX, mock AI responses, resume generation, chat interface, theme switching, and PDF export.
+        </div>
+    </div>
+</body>
+</html>
