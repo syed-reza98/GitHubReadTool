@@ -3,6 +3,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
 
 # Environment variables
 .env
@@ -11,27 +12,29 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
-# Server files (not needed for GitHub Pages)
-resume-server.js
-
 # Logs
-logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Runtime data
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
 
 # Coverage directory used by tools like istanbul
 coverage/
+.nyc_output/
 
 # IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-*
 
 # OS generated files
 .DS_Store
@@ -41,12 +44,48 @@ coverage/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
 # Temporary files
 *.tmp
 *.temp
 /tmp/
+.temp/
 
 # Build artifacts
 dist/
 build/
+.cache/
+
+# Test artifacts
+coverage/
+.nyc_output/
+test-results/
+screenshots/
+
+# Editor directories
+.vscode/
+.idea/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Generated files
+generated/
+*.generated.*
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Documentation build
+docs/build/
+docs/.doctrees/
