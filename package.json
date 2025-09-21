@@ -1,16 +1,43 @@
 {
   "name": "githubreadtool",
-  "version": "0.1.0",
-  "description": "Small toolkit to generate per-repository markdown summaries for a GitHub profile",
+  "version": "0.2.0",
+  "description": "Interactive GitHub Portfolio & Resume Generator with AI-powered tailoring using GitHub Models",
   "type": "module",
+  "main": "resume-server.js",
   "bin": {
-    "generate-docs": "./scripts/generate_docs.js"
+    "generate-docs": "./scripts/generate_docs.js",
+    "resume-server": "./resume-server.js"
   },
   "scripts": {
+    "start": "node resume-server.js",
+    "dev": "node --watch resume-server.js",
+    "setup": "node scripts/setup.js",
     "generate-docs": "node ./scripts/generate_docs.js",
-    "help": "node ./scripts/generate_docs.js --help"
+    "build-resume": "node scripts/build-resume.js",
+    "help": "node ./scripts/generate_docs.js --help",
+    "demo": "echo '🚀 Starting demo server...' && npm start"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "github",
+    "resume",
+    "portfolio",
+    "ai",
+    "github-models",
+    "pdf",
+    "job-application",
+    "tailoring"
+  ],
+  "author": "Syed Salman Reza",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/syed-reza98/GitHubReadTool.git"
   }
 }

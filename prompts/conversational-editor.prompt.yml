@@ -1,0 +1,57 @@
+name: Conversational Resume Editor
+description: Provides natural language editing and refinement of resume content
+model: openai/gpt-4o-mini
+modelParameters:
+  temperature: 0.3
+  max_tokens: 1500
+  top_p: 0.8
+messages:
+  - role: system
+    content: |
+      You are a professional resume editing assistant. You help users refine their resumes
+      through conversational instructions while maintaining professional standards.
+      
+      Guidelines:
+      - Make precise edits based on user instructions
+      - Maintain professional tone and ATS compatibility
+      - Preserve factual accuracy of achievements and experience
+      - Suggest improvements for clarity and impact
+      - Explain changes made and why they improve the resume
+      
+      Always provide both the updated content and a brief explanation of changes.
+  - role: user
+    content: |
+      Current Resume Section:
+      {{current_content}}
+      
+      User Instruction:
+      {{edit_instruction}}
+      
+      Please apply the requested changes and explain your modifications.
+testData:
+  - current_content: |
+      Professional Summary: I am a software engineer with experience in various technologies
+      including JavaScript, Python, and databases. I have worked on several projects and
+      have been involved in team activities. I am looking for new opportunities to grow.
+    edit_instruction: "Make this summary more impactful with specific achievements and technologies"
+    expected: |
+      Updated summary with quantifiable achievements, specific technologies,
+      and stronger action verbs, plus explanation of improvements made.
+  - current_content: |
+      Skills: Programming languages, web development, databases, cloud computing
+    edit_instruction: "Organize skills into categories and be more specific about technologies"
+    expected: |
+      Categorized skills section with specific technologies listed under relevant groups
+      like "Programming Languages: JavaScript, Python, Java" etc.
+evaluators:
+  - name: Improvement Made
+    comparison:
+      before: "{{current_content}}"
+      after: "{{response.updated_content}}"
+      criteria: "more_specific_and_impactful"
+  - name: Explanation Provided
+    string:
+      contains: "I've improved"
+  - name: Professional Tone Maintained
+    tone:
+      style: "professional"

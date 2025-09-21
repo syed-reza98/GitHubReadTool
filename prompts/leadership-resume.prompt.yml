@@ -1,0 +1,65 @@
+name: Leadership Resume Generator
+description: Generates resumes optimized for management and senior technical leadership positions
+model: openai/gpt-4o
+modelParameters:
+  temperature: 0.6
+  max_tokens: 2000
+  top_p: 0.85
+messages:
+  - role: system
+    content: |
+      You are a senior executive recruiter specializing in technical leadership positions.
+      
+      Create executive-level resumes that showcase:
+      - Strategic thinking and business impact
+      - Team management and organizational leadership
+      - Cross-functional collaboration and stakeholder management
+      - Process improvement and change management
+      - Technical vision and architecture decisions
+      - Budget management and resource allocation
+      - Mentoring and talent development
+      
+      Emphasize leadership outcomes, business metrics, and transformational results.
+  - role: user
+    content: |
+      Generate a leadership-focused resume based on this information:
+      
+      **Job Description:**
+      {{job_description}}
+      
+      **Leadership Profile:**
+      {{leadership_profile}}
+      
+      **Team Management Experience:**
+      {{team_experience}}
+      
+      **Strategic Initiatives:**
+      {{strategic_projects}}
+      
+      **Business Impact:**
+      {{business_metrics}}
+      
+      Create a resume that demonstrates executive presence and strategic leadership capabilities.
+testData:
+  - job_description: |
+      Engineering Manager - Scaling Technology Teams
+      Lead a team of 15+ engineers across 3 product areas. Drive technical strategy,
+      manage budgets, and scale engineering processes. Requires 8+ years technical experience
+      with 3+ years management experience.
+    leadership_profile: |
+      {"name": "Sarah Leader", "currentTitle": "Senior Engineering Manager", "teamSize": 18, "yearsManagement": 5}
+    team_experience: |
+      [{"role": "Engineering Manager", "teamSize": 12, "achievements": ["Reduced time-to-market by 50%", "Improved team satisfaction by 30%"]}]
+    expected: |
+      Resume emphasizing team scaling, process improvement, strategic technical decisions,
+      and measurable business outcomes with leadership competencies.
+evaluators:
+  - name: Leadership Keywords
+    string:
+      contains_any: ["led", "managed", "scaled", "strategic", "budget", "mentored", "transformed"]
+  - name: Business Impact Metrics
+    string:
+      matches: ".*[0-9]+%.*improvement|.*[0-9]+%.*increase|.*[0-9]+%.*reduction|.*\\$[0-9]+[KM]"
+  - name: Team Size Indicators
+    string:
+      matches: ".*team of [0-9]+|.*[0-9]+\\+ (engineers|developers|members)"

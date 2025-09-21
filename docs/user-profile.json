@@ -1,0 +1,61 @@
+{
+  "name": "Syed Salman Reza",
+  "title": "Software Engineer",
+  "location": "Dhaka, Bangladesh",
+  "email": "syedsalmanreza98@gmail.com",
+  "phone": "+880 1755 607998",
+  "github": "https://github.com/syed-reza98",
+  "linkedin": "https://linkedin.com/in/syedsalmanreza98",
+  "portfolio": "https://syed-reza98.github.io/GitHubReadTool",
+  "summary": "Experienced software engineer with expertise in full-stack development, system architecture, and team leadership. Proven track record of building scalable applications and optimizing system performance.",
+  "yearsExperience": 3,
+  "availability": "Open to senior software engineering opportunities in full-stack and backend development",
+  "primarySkills": [
+    "Full-Stack Development",
+    "System Architecture",
+    "Database Design",
+    "API Development",
+    "DevOps & CI/CD",
+    "Team Leadership"
+  ],
+  "languages": [
+    "English (Fluent)",
+    "Bengali (Native)",
+    "Hindi (Conversational)"
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Computer Science and Engineering",
+      "institution": "North South University",
+      "location": "Dhaka, Bangladesh",
+      "year": "2020-2024",
+      "gpa": "3.68/4.00"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "AWS Certified Developer",
+      "issuer": "Amazon Web Services",
+      "year": "2023"
+    },
+    {
+      "name": "Microsoft Azure Fundamentals",
+      "issuer": "Microsoft",
+      "year": "2023"
+    }
+  ],
+  "preferences": {
+    "jobTypes": ["Full-time", "Contract"],
+    "remoteWork": true,
+    "travelWillingness": "Occasional",
+    "industries": ["Technology", "FinTech", "E-commerce", "SaaS"],
+    "companySizes": ["Startup", "Mid-size", "Enterprise"]
+  },
+  "achievements": [
+    "Improved system performance by 40% through microservices architecture redesign",
+    "Reduced deployment time by 60% with automated CI/CD pipeline implementation",
+    "Led development team of 5 developers on multiple successful projects",
+    "Maintained 99.9% uptime for critical banking applications",
+    "Open-source contributor with projects used by 100+ developers"
+  ]
+}
