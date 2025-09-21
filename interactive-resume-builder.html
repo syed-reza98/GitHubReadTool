@@ -974,6 +974,32 @@ We are looking for a Senior Full Stack Developer to join our team. The ideal can
             reader.readAsText(file);
         }
 
+        // Configuration: Detect if we're running locally with API access
+        const API_CONFIG = {
+            isLocal: window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1',
+            baseURL: window.location.hostname === 'localhost' ? `http://${window.location.host}` : '',
+            endpoints: {
+                generateResume: '/api/generate-resume',
+                chatMessage: '/api/chat',
+                userProfile: '/api/user-profile',
+                health: '/api/health'
+            }
+        };
+
+        // Check API availability
+        async function checkApiAvailability() {
+            if (!API_CONFIG.isLocal) return false;
+            
+            try {
+                const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.health}`);
+                const data = await response.json();
+                return response.ok && data.success;
+            } catch (error) {
+                console.log('API not available, using demo mode');
+                return false;
+            }
+        }
+
         // Generate tailored resume
         async function generateResume() {
             const jobTitle = elements.jobTitle.value.trim();
@@ -988,11 +1014,38 @@ We are looking for a Senior Full Stack Developer to join our team. The ideal can
             updateStep('generate', 'current');
 
             try {
-                // Simulate API call to GitHub Models
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                const apiAvailable = await checkApiAvailability();
+                
+                if (apiAvailable) {
+                    // Use real API
+                    showStatusMessage('Generating resume using AI...', 'info');
+                    const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.generateResume}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            jobTitle,
+                            jobDescription,
+                            companyName: elements.companyName?.value?.trim() || ''
+                        })
+                    });
 
-                // Generate mock resume (in real app, this would use GitHub Models API)
-                currentResume = generateMockResume(jobTitle, jobDescription);
+                    if (response.ok) {
+                        const data = await response.json();
+                        currentResume = data.data.resume;
+                        showStatusMessage('Resume generated using AI!', 'success');
+                    } else {
+                        throw new Error('API request failed');
+                    }
+                } else {
+                    // Fallback to mock generation
+                    showStatusMessage('Generating resume using demo mode...', 'info');
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    currentResume = generateMockResume(jobTitle, jobDescription);
+                    showStatusMessage('Resume generated using demo data!', 'success');
+                }
+
                 displayResume(currentResume);
                 
                 elements.exportSection.style.display = 'block';
@@ -1008,7 +1061,21 @@ We are looking for a Senior Full Stack Developer to join our team. The ideal can
                 
             } catch (error) {
                 console.error('Resume generation failed:', error);
-                showStatusMessage('Failed to generate resume. Please try again.', 'error');
+                showStatusMessage('Failed to generate resume. Falling back to demo mode.', 'warning');
+                
+                // Fallback to mock generation
+                try {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    currentResume = generateMockResume(jobTitle, jobDescription);
+                    displayResume(currentResume);
+                    elements.exportSection.style.display = 'block';
+                    elements.chatInterface.style.display = 'block';
+                    updateStep('generate', 'completed');
+                    updateStep('edit', 'current');
+                    addChatMessage('system', 'Resume generated in demo mode! How would you like to improve it?');
+                } catch (fallbackError) {
+                    showStatusMessage('Failed to generate resume. Please try again.', 'error');
+                }
             } finally {
                 setLoading(false);
             }
@@ -1146,23 +1213,57 @@ We are looking for a Senior Full Stack Developer to join our team. The ideal can
             elements.chatInput.value = '';
 
             try {
-                // Simulate AI processing
-                addChatMessage('system', 'Processing your request...');
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                // Simulate AI response (in real app, this would call GitHub Models API)
-                const response = generateMockChatResponse(message);
+                const apiAvailable = await checkApiAvailability();
                 
-                // Remove "processing" message
-                const messages = elements.chatMessages.querySelectorAll('.message');
-                messages[messages.length - 1].remove();
+                if (apiAvailable) {
+                    // Use real API
+                    addChatMessage('system', 'Processing your request with AI...');
+                    
+                    const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.chatMessage}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message,
+                            resume: currentResume,
+                            conversationHistory
+                        })
+                    });
 
-                addChatMessage('assistant', response.message);
-                
-                if (response.updatedResume) {
-                    currentResume = response.updatedResume;
-                    displayResume(currentResume);
-                    showStatusMessage('Resume updated successfully!', 'success');
+                    // Remove "processing" message
+                    const messages = elements.chatMessages.querySelectorAll('.message');
+                    messages[messages.length - 1].remove();
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        addChatMessage('assistant', data.response || 'I\'ve processed your request.');
+                        
+                        if (data.updatedResume) {
+                            currentResume = data.updatedResume;
+                            displayResume(currentResume);
+                            showStatusMessage('Resume updated using AI!', 'success');
+                        }
+                    } else {
+                        throw new Error('API request failed');
+                    }
+                } else {
+                    // Fallback to mock responses
+                    addChatMessage('system', 'Processing your request...');
+                    await new Promise(resolve => setTimeout(resolve, 1500));
+
+                    // Remove "processing" message
+                    const messages = elements.chatMessages.querySelectorAll('.message');
+                    messages[messages.length - 1].remove();
+
+                    const response = generateMockChatResponse(message);
+                    addChatMessage('assistant', response.message);
+                    
+                    if (response.updatedResume) {
+                        currentResume = response.updatedResume;
+                        displayResume(currentResume);
+                        showStatusMessage('Resume updated in demo mode!', 'success');
+                    }
                 }
 
                 updateStep('edit', 'completed');
@@ -1170,7 +1271,16 @@ We are looking for a Senior Full Stack Developer to join our team. The ideal can
                 
             } catch (error) {
                 console.error('Chat message failed:', error);
-                addChatMessage('system', 'Sorry, there was an error processing your request. Please try again.');
+                
+                // Fallback to mock response
+                const messages = elements.chatMessages.querySelectorAll('.message');
+                if (messages[messages.length - 1].classList.contains('system')) {
+                    messages[messages.length - 1].remove();
+                }
+                
+                const response = generateMockChatResponse(message);
+                addChatMessage('assistant', response.message + ' (Demo mode)');
+                showStatusMessage('Using demo response due to API unavailability.', 'warning');
             }
         }
 

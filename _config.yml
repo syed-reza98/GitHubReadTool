@@ -28,8 +28,16 @@ exclude:
   - resume-server.js
   - package.json
   - package-lock.json
+  - scripts/
+  - tests/
+  - models/
+  - prompts/
+  - src/
 
 # Repository settings
 repository: syed-reza98/GitHubReadTool
 github:
   repository_url: https://github.com/syed-reza98/GitHubReadTool
+
+# GitHub Pages build source (will be overridden by GitHub Actions)
+# The workflow will deploy from ./dist directory instead

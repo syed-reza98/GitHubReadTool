@@ -11,7 +11,7 @@ E-commerce Back-end
 
 - **GitHub:** https://github.com/syed-reza98/saas_ecom
 - **Primary Language:** PHP
-- **Last Updated:** 04/09/2025
+- **Last Updated:** 9/3/2025
 - **Repository Size:** ~5MB
 
 ## Architecture & Tech Stack

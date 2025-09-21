@@ -9,6 +9,7 @@
  * - Health checks and monitoring
  */
 
+import 'dotenv/config';
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
@@ -121,6 +122,12 @@ class ResumeBuilderServer {
     this.startTime = Date.now();
     this.requestCount = 0;
     this.errorCount = 0;
+    
+    // Log configuration status
+    console.log('🔧 Configuration:');
+    console.log(`  GitHub API Token: ${process.env.GITHUB_TOKEN ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`  GitHub Models Token: ${process.env.GITHUB_MODELS_TOKEN ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`  Demo Mode: ${this.githubModels.demoMode ? '⚠️  Enabled' : '✅ Disabled'}`);
   }
 
   start() {
