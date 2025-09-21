@@ -3,11 +3,12 @@
  * Comprehensive testing for all application components
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'node:test';
+import { describe, it, before, after } from 'node:test';
 import { spawn } from 'child_process';
 import http from 'http';
 import fs from 'fs/promises';
 import path from 'path';
+import assert from 'assert';
 
 const TEST_PORT = 3001;
 const BASE_URL = `http://localhost:${TEST_PORT}`;
@@ -15,7 +16,7 @@ const BASE_URL = `http://localhost:${TEST_PORT}`;
 describe('GitHubReadTool Application Tests', () => {
   let serverProcess;
 
-  beforeEach(async () => {
+  before(async () => {
     // Start server for testing
     serverProcess = spawn('node', ['resume-server.js'], {
       env: { ...process.env, PORT: TEST_PORT },
@@ -40,7 +41,7 @@ describe('GitHubReadTool Application Tests', () => {
     });
   });
 
-  afterEach(() => {
+  after(() => {
     if (serverProcess) {
       serverProcess.kill();
     }
@@ -49,25 +50,27 @@ describe('GitHubReadTool Application Tests', () => {
   describe('Server Endpoints', () => {
     it('should serve homepage successfully', async () => {
       const response = await fetch(BASE_URL);
-      expect(response.status).toBe(200);
-      expect(response.headers.get('content-type')).toContain('text/html');
+      assert.strictEqual(response.status, 200);
+      assert(response.headers.get('content-type').includes('text/html'));
     });
 
     it('should serve resume builder interface', async () => {
       const response = await fetch(`${BASE_URL}/builder`);
-      expect(response.status).toBe(200);
-      expect(response.headers.get('content-type')).toContain('text/html');
+      assert.strictEqual(response.status, 200);
+      assert(response.headers.get('content-type').includes('text/html'));
     });
 
-    it('should serve API documentation', async () => {
-      const response = await fetch(`${BASE_URL}/api/docs`);
-      expect(response.status).toBe(200);
-      expect(response.headers.get('content-type')).toContain('text/html');
+    it('should provide health check', async () => {
+      const response = await fetch(`${BASE_URL}/api/health`);
+      assert.strictEqual(response.status, 200);
+      const data = await response.json();
+      assert.strictEqual(data.success, true);
+      assert.strictEqual(data.data.status, 'healthy');
     });
 
     it('should handle 404 for non-existent routes', async () => {
       const response = await fetch(`${BASE_URL}/non-existent-route`);
-      expect(response.status).toBe(404);
+      assert.strictEqual(response.status, 404);
     });
   });
 
@@ -86,7 +89,27 @@ describe('GitHubReadTool Application Tests', () => {
         try {
           await fs.access(file);
         } catch (error) {
-          throw new Error(`Required file ${file} is missing`);
+          assert.fail(`Required file ${file} is missing`);
+        }
+      }
+    });
+
+    it('should have required directories', async () => {
+      const requiredDirs = [
+        'docs',
+        'docs/projects',
+        'scripts',
+        'models',
+        'src',
+        'public'
+      ];
+
+      for (const dir of requiredDirs) {
+        try {
+          const stat = await fs.stat(dir);
+          assert(stat.isDirectory(), `${dir} should be a directory`);
+        } catch (error) {
+          assert.fail(`Required directory ${dir} is missing`);
         }
       }
     });
