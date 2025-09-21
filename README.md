@@ -396,15 +396,37 @@ DEBUG=resume-builder:* npm start
 
 ## 🚀 **GitHub Pages Deployment**
 
-The Interactive Resume Builder is now deployed and accessible via GitHub Pages!
+### **✨ NEW: Real AI Integration Available!**
+
+The Interactive Resume Builder now supports **full AI integration on GitHub Pages** using repository secrets! Configure your `MODELS_API_TOKEN` in repository settings to enable real AI-powered resume generation.
 
 ### **🌐 Live Demo**
 Visit: **[https://syed-reza98.github.io/GitHubReadTool/](https://syed-reza98.github.io/GitHubReadTool/)**
 
+### **⚙️ Enable Real AI on Your GitHub Pages**
+
+1. **Fork this repository**
+2. **Configure Repository Secrets**:
+   - Go to Settings → Secrets and variables → Actions
+   - Add `MODELS_API_TOKEN` with your GitHub Models API token
+3. **Enable GitHub Pages**: Settings → Pages → Deploy from GitHub Actions
+4. **Visit your deployment**: `https://your-username.github.io/GitHubReadTool/`
+
+**🎉 Result**: Full AI-powered resume builder with real GitHub Models integration!
+
 ### **📱 Features Available in GitHub Pages**
+
+**With Repository Secrets Configured**:
+- ✅ **Real AI Integration**: Actual GitHub Models API responses
+- ✅ **Live Project Data**: Automatically updated from your repositories  
+- ✅ **AI-Powered Generation**: Genuine tailored resumes based on job descriptions
+- ✅ **Conversational Editing**: Real AI chat for resume refinement
+- ✅ **Professional Output**: Complete, AI-generated content
+
+**Fallback Mode** (without secrets):
 - ✅ **Complete UI/UX**: Full interactive interface with professional design
 - ✅ **Theme System**: Professional, Dark, and Auto themes with accessibility support  
-- ✅ **Demo Mode**: Realistic AI responses and resume generation without API tokens
+- ✅ **Enhanced Demo**: Realistic mock responses and resume generation
 - ✅ **Conversational Interface**: Chat-based editing with mock AI interactions
 - ✅ **Export Functionality**: Browser preview and PDF download capabilities
 - ✅ **Responsive Design**: Perfect experience on desktop, tablet, and mobile devices
