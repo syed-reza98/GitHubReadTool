@@ -394,6 +394,91 @@ DEBUG=resume-builder:* npm start
 # Enables detailed logging for troubleshooting
 ```
 
+## 🚀 **GitHub Pages Deployment**
+
+The Interactive Resume Builder is now deployed and accessible via GitHub Pages!
+
+### **🌐 Live Demo**
+Visit: **[https://syed-reza98.github.io/GitHubReadTool/](https://syed-reza98.github.io/GitHubReadTool/)**
+
+### **📱 Features Available in GitHub Pages**
+- ✅ **Complete UI/UX**: Full interactive interface with professional design
+- ✅ **Theme System**: Professional, Dark, and Auto themes with accessibility support  
+- ✅ **Demo Mode**: Realistic AI responses and resume generation without API tokens
+- ✅ **Conversational Interface**: Chat-based editing with mock AI interactions
+- ✅ **Export Functionality**: Browser preview and PDF download capabilities
+- ✅ **Responsive Design**: Perfect experience on desktop, tablet, and mobile devices
+
+### **⚙️ How to Deploy Your Own**
+
+1. **Fork the Repository**
+   ```bash
+   # Fork this repo on GitHub, then clone your fork
+   git clone https://github.com/YOUR-USERNAME/GitHubReadTool.git
+   cd GitHubReadTool
+   ```
+
+2. **Enable GitHub Pages**
+   - Go to repository Settings → Pages
+   - Set Source to "Deploy from a branch"
+   - Select branch: `main` or your working branch
+   - Set folder: `/ (root)`
+   - Click Save
+
+3. **Access Your Deployment**
+   - Your site will be available at: `https://YOUR-USERNAME.github.io/GitHubReadTool/`
+   - The resume builder will be at: `https://YOUR-USERNAME.github.io/GitHubReadTool/interactive-resume-builder.html`
+
+### **🔧 Customization for GitHub Pages**
+
+#### **Update User Profile**
+Edit `docs/user-profile.json` with your information:
+```json
+{
+  "name": "Your Name",
+  "email": "your.email@example.com",
+  "phone": "+1-234-567-8900",
+  "location": "Your City, Country",
+  "github": "your-github-username",
+  "title": "Your Professional Title",
+  "summary": "Your professional summary...",
+  "yearsExperience": 5,
+  "experience": [...],
+  "education": [...],
+  "skills": {...}
+}
+```
+
+#### **Generate Your Project Documentation**
+```bash
+# Run locally to update project documentation
+npm install
+GITHUB_TOKEN=your_token node scripts/generate_docs.js --user YOUR-USERNAME --out docs/projects
+git add docs/projects/
+git commit -m "Update project documentation"
+git push
+```
+
+### **🎯 Differences Between Local and GitHub Pages**
+
+| Feature | Local Development | GitHub Pages |
+|---------|------------------|--------------|
+| AI Integration | ✅ Full GitHub Models API | ⚠️ Demo mode with mock responses |
+| Resume Generation | ✅ Real AI-powered content | ✅ Realistic mock content |
+| Conversational Chat | ✅ Actual AI responses | ✅ Predefined helpful responses |
+| Export Features | ✅ Full PDF generation | ✅ Browser preview (print to PDF) |
+| Theme System | ✅ Complete functionality | ✅ Complete functionality |
+| User Experience | ✅ Full features | ✅ Full UI/UX experience |
+
+### **🛠️ Technical Implementation**
+
+The GitHub Pages deployment uses:
+- **Static HTML/CSS/JavaScript**: No server required
+- **Demo Mode**: Fallback responses when API tokens unavailable  
+- **Jekyll Configuration**: Optimized `_config.yml` for GitHub Pages
+- **Professional Landing Page**: `index.html` with feature overview
+- **Standalone Resume Builder**: `interactive-resume-builder.html` works independently
+
 ## License & Acknowledgments
 
 MIT License - See LICENSE file for details.
