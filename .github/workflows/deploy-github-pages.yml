@@ -38,15 +38,15 @@ jobs:
         
       - name: Generate project documentation
         run: |
-          GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }} node scripts/generate_docs.js --user syed-reza98 --out docs/projects
+          GITHUB_REPO_TOKEN=${{ secrets.GITHUB_TOKEN }} node scripts/generate_docs.js --user syed-reza98 --out docs/projects
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build GitHub Pages version with real AI
         run: node scripts/build-github-pages.js
         env:
-          MODELS_API_TOKEN: ${{ secrets.MODELS_API_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          GITHUB_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Setup Pages
         uses: actions/configure-pages@v4

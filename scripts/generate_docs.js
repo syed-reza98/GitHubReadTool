@@ -8,7 +8,7 @@ import https from 'https';
 
 function usage() {
   console.log('Usage: node scripts/generate_docs.js --user <github-username> [--out docs/projects] [--limit N]');
-  console.log('Requires GITHUB_TOKEN env var for higher rate limits (optional for public repos).');
+  console.log('Requires GITHUB_REPO_TOKEN or GITHUB_TOKEN env var for higher rate limits (optional for public repos).');
 }
 
 const args = process.argv.slice(2);
@@ -32,7 +32,7 @@ if (!user) {
 
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN || null;
+const GITHUB_REPO_TOKEN = process.env.GITHUB_REPO_TOKEN || process.env.GITHUB_TOKEN || null;
 
 function ghGet(pathname, retries = 3) {
   const options = {
@@ -45,7 +45,7 @@ function ghGet(pathname, retries = 3) {
       'X-GitHub-Api-Version': '2022-11-28'
     }
   };
-  if (GITHUB_TOKEN) options.headers['Authorization'] = `Bearer ${GITHUB_TOKEN}`;
+  if (GITHUB_REPO_TOKEN) options.headers['Authorization'] = `Bearer ${GITHUB_REPO_TOKEN}`;
 
   return new Promise((resolve, reject) => {
     const makeRequest = (attempt) => {
@@ -98,7 +98,7 @@ async function run() {
 
     // If a token is present, try to detect authenticated user and use /user/repos to include private/collaborator repos.
     let authUser = null;
-    if (GITHUB_TOKEN) {
+    if (GITHUB_REPO_TOKEN) {
       try {
         const me = await ghGet(`/user`);
         if (me && me.login) {
@@ -111,7 +111,7 @@ async function run() {
     }
 
     // If authenticated and requested user matches auth user, fetch /user/repos with affiliation to include owner/collaborator/org repos.
-    if (GITHUB_TOKEN && authUser && authUser.toLowerCase() === user.toLowerCase()) {
+    if (GITHUB_REPO_TOKEN && authUser && authUser.toLowerCase() === user.toLowerCase()) {
       console.log('Fetching all repositories (public + private)...');
       let page = 1;
       let allRepos = [];

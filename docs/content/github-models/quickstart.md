@@ -39,13 +39,13 @@ The GitHubReadTool Resume Builder uses GitHub Models to create intelligent, job-
 
 3. Configure your environment variables in `.env`:
    ```bash
-   # GitHub Models Configuration
-   GITHUB_MODELS_TOKEN=ghp_your_models_token_here
+   # GitHub Models Configuration (using official GITHUB_TOKEN naming)
+   GITHUB_TOKEN=ghp_your_models_token_here
    MODEL_ENDPOINT=https://models.github.ai
    DEFAULT_MODEL=openai/gpt-4o-mini
    
-   # GitHub API Configuration
-   GITHUB_TOKEN=ghp_your_github_token_here
+   # GitHub Repository API Configuration
+   GITHUB_REPO_TOKEN=ghp_your_github_token_here
    
    # Server Configuration
    PORT=3000
@@ -278,7 +278,7 @@ const comparisons = await Promise.all(
 ### Common Issues
 
 **"GitHub Models token is required"**
-- Ensure `GITHUB_MODELS_TOKEN` is set in `.env`
+- Ensure `GITHUB_TOKEN` is set in `.env`
 - Verify token has `models` scope permissions
 - Check token hasn't expired
 

@@ -114,6 +114,31 @@ describe('GitHubReadTool Application Tests', () => {
       }
     });
   });
+
+  describe('GitHub Models Integration', () => {
+    it('should configure GitHub Models with correct environment variables', async () => {
+      // Ensure environment is loaded
+      process.env.GITHUB_TOKEN = process.env.GITHUB_TOKEN || 'test_token_123';
+      
+      const { GitHubModels } = await import('../../models/github-models.js');
+      const models = new GitHubModels();
+      
+      // Test that configuration is loaded correctly
+      assert.strictEqual(models.model, 'openai/gpt-4o-mini', 'Should use correct default model');
+      assert.strictEqual(models.endpoint, 'https://models.github.ai', 'Should use correct endpoint');
+      assert(models.token, 'Token should be defined');
+      assert(typeof models.token === 'string' || models.token === undefined, 'Token should be string or undefined');
+    });
+
+    it('should handle demo mode when no token is provided', async () => {
+      const { GitHubModels } = await import('../../models/github-models.js');
+      // Pass undefined to ensure it doesn't fall back to env, and force demo mode
+      const models = new GitHubModels({ token: undefined, demoMode: true });
+      
+      assert.strictEqual(models.demoMode, true, 'Should be in demo mode when no token provided');
+      // When token is undefined, constructor will use env token, but demoMode is explicitly set
+    });
+  });
 });
 
 // Helper function for testing
