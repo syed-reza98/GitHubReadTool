@@ -268,7 +268,8 @@ Generate a JSON resume with sections: personalInfo, summary, skills, projects, e
     `function selectRelevantProjects(jobDescription, availableProjects = null) {
             const projects = availableProjects || loadEmbeddedProjects();`
 ).replace(
-    'if (apiAvailable) {',
+    // Target specifically the chat function context by looking for the message variable usage
+    'if (apiAvailable) {\n                    // Use real API\n                    addChatMessage(\'system\', \'Processing your request with AI...\');',
     `if (apiAvailable && API_CONFIG.useRealAI) {
                     try {
                         // Use real GitHub Models API for chat
@@ -306,7 +307,9 @@ Provide a helpful response and suggest specific improvements. If the instruction
                         addChatMessage('assistant', response.message + ' (Enhanced demo)');
                         showStatusMessage('Using enhanced demo response!', 'warning');
                     }
-                } else if (apiAvailable) {`
+                } else if (apiAvailable) {
+                    // Use real API
+                    addChatMessage('system', 'Processing your request with AI...');`
 );
 
 // Write the modified HTML
