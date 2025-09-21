@@ -13,7 +13,7 @@ A comprehensive, bilingual (English & Bengali) wedding website serving as the di
 - **Primary Language:** TypeScript
 - **Languages:** TypeScript (89.3%), Shell (6.3%), CSS (2.5%), JavaScript (1.8%), HTML (0.2%)
 - **Stats:** ⭐ 3 stars, 🍴 1 forks
-- **Last Updated:** 28/08/2025
+- **Last Updated:** 8/28/2025
 - **Repository Size:** ~142MB
 
 ## Architecture & Tech Stack

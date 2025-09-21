@@ -3,17 +3,17 @@
 
 Toolkit to fetch GitHub Profile Data
 
-**Automated GitHub Portfolio & Resume Generator**
-Professional toolkit that fetches GitHub repository data, filters for meaningful contributions, and generates comprehensive project documentation with PDF-ready resume integration.
+**🤖 Interactive AI-Powered Resume Builder & GitHub Portfolio Generator**
+Advanced toolkit that combines automated GitHub repository analysis with AI-powered resume tailoring. Features include job description-based resume customization, conversational editing with GitHub Models, and professional PDF export.
 ## Features
 
 ## Code & Repository
 
 - **GitHub:** https://github.com/syed-reza98/GitHubReadTool
 - **Primary Language:** HTML
-- **Languages:** HTML (90.8%), JavaScript (9.2%)
-- **Last Updated:** 21/09/2025
-- **Repository Size:** ~2MB
+- **Languages:** HTML (54.7%), JavaScript (44.6%), CSS (0.7%)
+- **Last Updated:** 9/21/2025
+- **Repository Size:** ~4MB
 
 ## Architecture & Tech Stack
 

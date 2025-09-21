@@ -12,7 +12,7 @@ A complete, modern wedding website platform built with Laravel 11 and Next.js 14
 - **GitHub:** https://github.com/syed-reza98/Weeding
 - **Primary Language:** TypeScript
 - **Languages:** TypeScript (51.1%), PHP (36.3%), Shell (8.7%), Dockerfile (1.9%), Blade (1.5%)
-- **Last Updated:** 01/09/2025
+- **Last Updated:** 9/1/2025
 - **Repository Size:** ~1MB
 
 ## Architecture & Tech Stack

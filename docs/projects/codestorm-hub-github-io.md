@@ -13,7 +13,7 @@ A comprehensive, modern portfolio website built with Jekyll for GitHub Pages. Th
 - **Primary Language:** HTML
 - **Languages:** HTML (53.0%), CSS (28.2%), JavaScript (18.5%), Ruby (0.3%)
 - **Stats:** ⭐ 0 stars, 🍴 1 forks
-- **Last Updated:** 01/08/2025
+- **Last Updated:** 8/1/2025
 - **Repository Size:** ~0MB
 
 ## Architecture & Tech Stack

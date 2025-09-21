@@ -9,6 +9,7 @@
  * - Health checks and monitoring
  */
 
+import 'dotenv/config';
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
@@ -113,6 +114,14 @@ class SimpleRateLimiter {
 class ResumeBuilderServer {
   constructor(port = 3000) {
     this.port = port;
+    
+    // Debug environment variables
+    console.log('Environment check:');
+    console.log('  GITHUB_MODELS_TOKEN exists:', !!process.env.GITHUB_MODELS_TOKEN);
+    console.log('  GITHUB_MODELS_TOKEN length:', process.env.GITHUB_MODELS_TOKEN ? process.env.GITHUB_MODELS_TOKEN.length : 0);
+    console.log('  GITHUB_TOKEN exists:', !!process.env.GITHUB_TOKEN);
+    console.log('  GITHUB_TOKEN length:', process.env.GITHUB_TOKEN ? process.env.GITHUB_TOKEN.length : 0);
+    
     this.githubModels = new GitHubModels();
     this.validator = new SimpleValidator();
     this.errorHandler = new SimpleErrorHandler();
