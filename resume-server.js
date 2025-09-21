@@ -114,14 +114,6 @@ class SimpleRateLimiter {
 class ResumeBuilderServer {
   constructor(port = 3000) {
     this.port = port;
-    
-    // Debug environment variables
-    console.log('Environment check:');
-    console.log('  GITHUB_MODELS_TOKEN exists:', !!process.env.GITHUB_MODELS_TOKEN);
-    console.log('  GITHUB_MODELS_TOKEN length:', process.env.GITHUB_MODELS_TOKEN ? process.env.GITHUB_MODELS_TOKEN.length : 0);
-    console.log('  GITHUB_TOKEN exists:', !!process.env.GITHUB_TOKEN);
-    console.log('  GITHUB_TOKEN length:', process.env.GITHUB_TOKEN ? process.env.GITHUB_TOKEN.length : 0);
-    
     this.githubModels = new GitHubModels();
     this.validator = new SimpleValidator();
     this.errorHandler = new SimpleErrorHandler();
@@ -130,6 +122,12 @@ class ResumeBuilderServer {
     this.startTime = Date.now();
     this.requestCount = 0;
     this.errorCount = 0;
+    
+    // Log configuration status
+    console.log('🔧 Configuration:');
+    console.log(`  GitHub API Token: ${process.env.GITHUB_TOKEN ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`  GitHub Models Token: ${process.env.GITHUB_MODELS_TOKEN ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`  Demo Mode: ${this.githubModels.demoMode ? '⚠️  Enabled' : '✅ Disabled'}`);
   }
 
   start() {
