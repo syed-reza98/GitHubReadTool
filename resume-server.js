@@ -598,7 +598,7 @@ class ResumeBuilderServer {
     <div class="feature">
         <h3>📖 Quick Start</h3>
         <ol>
-            <li>Set your <code>GITHUB_MODELS_TOKEN</code> environment variable</li>
+            <li>Set your <code>GITHUB_TOKEN</code> environment variable</li>
             <li>Click "Open Resume Builder" above</li>
             <li>Paste in a job description and generate your tailored resume</li>
             <li>Use the chat interface to refine and improve the content</li>
