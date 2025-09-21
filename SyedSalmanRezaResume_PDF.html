@@ -13,29 +13,32 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.4;
-            color: #2c3e50;
+            color: #111827;
             background-color: #ffffff;
-            font-size: 11pt;
+            font-size: 10pt;
+            margin: 0;
+            padding: 0;
         }
         
         .container {
             max-width: 210mm; /* A4 width */
             min-height: 297mm; /* A4 height */
             margin: 0 auto;
-            padding: 15mm 20mm;
+            padding: 12mm 14mm;
             background: white;
         }
         
-        /* Header Section - Optimized for PDF */
+        /* Header Section - Premium Modern Design */
         .header {
             display: flex;
             align-items: flex-start;
-            gap: 25px;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #00ab44;
+            gap: 20px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3b82f6;
+            position: relative;
         }
         
         .header-content {
@@ -43,26 +46,28 @@
         }
         
         .header-content h1 {
-            font-size: 28pt;
-            color: #00ab44;
-            margin-bottom: 5px;
-            font-weight: 700;
+            font-size: 24pt;
+            color: #1e3a8a;
+            margin-bottom: 3px;
+            font-weight: 800;
             letter-spacing: -0.5px;
+            line-height: 1;
         }
         
         .header-content .title {
-            font-size: 14pt;
-            color: #34495e;
-            margin-bottom: 15px;
-            font-weight: 500;
+            font-size: 12pt;
+            color: #475569;
+            margin-bottom: 10px;
+            font-weight: 600;
+            line-height: 1.1;
         }
         
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px 25px;
-            font-size: 9.5pt;
-            color: #7f8c8d;
+            gap: 4px 18px;
+            font-size: 9pt;
+            color: #64748b;
         }
         
         .contact-item {
@@ -72,268 +77,300 @@
         }
         
         .contact-item .icon {
-            width: 12px;
-            margin-right: 6px;
-            font-size: 8pt;
-            color: #00ab44;
+            width: 10px;
+            margin-right: 5px;
+            font-size: 7pt;
+            color: #3b82f6;
             text-align: center;
         }
         
         .contact-item a {
-            color: #00ab44;
+            color: #3b82f6;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .profile-image {
-            width: 110px;
-            height: 110px;
-            border-radius: 8px;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #ecf0f1;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border: 3px solid #e2e8f0;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
             flex-shrink: 0;
         }
         
-        /* Section Styles */
+        /* Section Styles - Premium Modern */
         .section {
-            margin-bottom: 18px;
+            margin-bottom: 14px;
         }
         
         .section h2 {
-            font-size: 16pt;
-            color: #00ab44;
-            margin-bottom: 12px;
-            padding-bottom: 4px;
-            border-bottom: 1px solid #bdc3c7;
-            font-weight: 600;
-        }
-        
-        /* Professional Summary */
-        .summary p {
-            font-size: 10.5pt;
-            line-height: 1.5;
-            color: #34495e;
-            text-align: justify;
+            font-size: 14pt;
+            color: #1e3a8a;
             margin-bottom: 8px;
+            padding-bottom: 2px;
+            border-bottom: 2px solid #ddd6fe;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        /* Skills - Compact Grid */
+        /* Professional Summary - Enhanced */
+        .summary p {
+            font-size: 9.5pt;
+            line-height: 1.4;
+            color: #475569;
+            text-align: justify;
+            margin-bottom: 6px;
+        }
+        
+        /* Skills - Premium Grid Design */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 12px;
         }
         
         .skill-category {
-            background: #f8f9fa;
-            padding: 12px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 8px 10px;
             border-radius: 6px;
-            border-left: 3px solid #00ab44;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .skill-category h3 {
-            font-size: 10pt;
-            color: #2c3e50;
-            margin-bottom: 6px;
-            font-weight: 600;
+            font-size: 9pt;
+            color: #1e3a8a;
+            margin-bottom: 4px;
+            font-weight: 700;
         }
         
         .skill-category p {
-            color: #7f8c8d;
-            font-size: 9pt;
+            color: #64748b;
+            font-size: 8pt;
             line-height: 1.3;
         }
         
-        /* Experience - Compact Layout */
+        /* Experience - Ultra Compact Layout */
         .experience-item {
-            margin-bottom: 15px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 6px;
-            border-left: 3px solid #00ab44;
+            margin-bottom: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
             break-inside: avoid;
         }
         
+        .experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
         .experience-header {
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         
         .experience-header h3 {
-            font-size: 12pt;
-            color: #2c3e50;
-            margin-bottom: 3px;
-            font-weight: 600;
+            font-size: 11pt;
+            color: #111827;
+            margin-bottom: 2px;
+            font-weight: 700;
         }
         
         .experience-header .company {
-            font-size: 10pt;
-            color: #7f8c8d;
-            margin-bottom: 4px;
+            font-size: 9pt;
+            color: #2563eb;
+            margin-bottom: 1px;
+            font-weight: 600;
         }
         
         .experience-header .duration {
-            font-size: 9pt;
-            color: #95a5a6;
+            font-size: 8pt;
+            color: #6b7280;
             font-weight: 500;
         }
         
         .experience-item ul {
             list-style: none;
-            margin-top: 8px;
+            margin-top: 6px;
+            padding-left: 0;
         }
         
         .experience-item li {
-            margin-bottom: 4px;
-            padding-left: 15px;
+            margin-bottom: 3px;
+            padding-left: 12px;
             position: relative;
-            color: #34495e;
-            font-size: 9.5pt;
-            line-height: 1.4;
+            color: #374151;
+            font-size: 9pt;
+            line-height: 1.35;
         }
         
         .experience-item li:before {
-            content: "•";
-            color: #00ab44;
+            content: "▪";
+            color: #2563eb;
             position: absolute;
             left: 0;
             font-weight: bold;
+            font-size: 10pt;
         }
         
-        /* Projects - Two Column Layout */
+        /* Projects - Premium Modern Design */
         .projects-intro {
-            font-size: 9.5pt;
-            color: #7f8c8d;
-            margin-bottom: 15px;
+            font-size: 8.5pt;
+            color: #64748b;
+            margin-bottom: 10px;
             text-align: center;
         }
         
         .projects-intro a {
-            color: #00ab44;
+            color: #3b82f6;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
         
         .projects-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 10px;
+            margin-bottom: 12px;
         }
         
         .project-card {
-            background: #ffffff;
-            border: 1px solid #bdc3c7;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border: 1px solid #e2e8f0;
             border-radius: 6px;
-            padding: 12px;
+            padding: 8px;
             break-inside: avoid;
+            border-left: 4px solid #3b82f6;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
         }
         
         .project-card h3 {
-            font-size: 10.5pt;
-            color: #2c3e50;
-            margin-bottom: 4px;
-            font-weight: 600;
-            line-height: 1.2;
+            font-size: 9.5pt;
+            color: #1e3a8a;
+            margin-bottom: 3px;
+            font-weight: 700;
+            line-height: 1.1;
         }
         
         .project-tech {
-            font-size: 8pt;
-            color: #00ab44;
-            font-weight: 500;
-            margin-bottom: 8px;
+            font-size: 7pt;
+            color: #3b82f6;
+            font-weight: 600;
+            margin-bottom: 6px;
             padding: 2px 6px;
-            background: #e8f5e8;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
             border-radius: 3px;
             display: inline-block;
         }
         
         .project-card p {
-            color: #7f8c8d;
-            font-size: 8.5pt;
-            line-height: 1.3;
-            margin-bottom: 8px;
+            color: #64748b;
+            font-size: 8pt;
+            line-height: 1.25;
+            margin-bottom: 6px;
         }
         
         .project-links {
-            font-size: 8pt;
+            font-size: 7pt;
         }
         
         .project-links a {
-            color: #00ab44;
+            color: #3b82f6;
             text-decoration: none;
-            font-weight: 500;
-            margin-right: 10px;
+            font-weight: 600;
+            margin-right: 8px;
+            padding: 2px 4px;
+            background: #f1f5f9;
+            border-radius: 2px;
         }
         
-        /* Education - Compact */
+        /* Education - Modern Compact */
         .education-item {
-            margin-bottom: 12px;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 5px;
+            margin-bottom: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid #f1f5f9;
             break-inside: avoid;
+        }
+        
+        .education-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
         }
         
         .education-item h3 {
-            font-size: 10.5pt;
-            color: #2c3e50;
-            margin-bottom: 3px;
-            font-weight: 600;
+            font-size: 10pt;
+            color: #1e3a8a;
+            margin-bottom: 2px;
+            font-weight: 700;
         }
         
         .education-item .institution {
-            font-size: 9.5pt;
-            color: #7f8c8d;
-            margin-bottom: 2px;
+            font-size: 8.5pt;
+            color: #3b82f6;
+            margin-bottom: 1px;
+            font-weight: 600;
         }
         
         .education-item .duration {
-            font-size: 8.5pt;
-            color: #95a5a6;
+            font-size: 7.5pt;
+            color: #64748b;
+            font-weight: 500;
         }
         
-        /* Certifications - Grid */
+        /* Certifications - Premium Grid */
         .cert-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
+            gap: 6px;
         }
         
         .cert-item {
-            padding: 8px;
-            background: #ffffff;
-            border: 1px solid #ecf0f1;
+            padding: 6px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
             border-radius: 4px;
             break-inside: avoid;
+            border-left: 3px solid #3b82f6;
         }
         
         .cert-item .cert-name {
-            color: #2c3e50;
-            font-weight: 500;
+            color: #1e3a8a;
+            font-weight: 600;
             margin-bottom: 2px;
-            font-size: 9pt;
+            font-size: 8pt;
             line-height: 1.2;
         }
         
         .cert-item .cert-details {
-            color: #95a5a6;
-            font-size: 8pt;
+            color: #64748b;
+            font-size: 7pt;
         }
         
-        /* Additional Info */
+        /* Additional Info - Modern */
         .info-box {
-            background: #f8f9fa;
-            padding: 12px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 8px;
             border-radius: 6px;
-            border-left: 3px solid #00ab44;
-            margin-top: 10px;
+            border-left: 4px solid #3b82f6;
+            margin-top: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
         .info-row {
-            margin-bottom: 6px;
-            font-size: 9.5pt;
+            margin-bottom: 4px;
+            font-size: 8.5pt;
         }
         
         .info-row:last-child {
@@ -341,37 +378,51 @@
         }
         
         .info-row strong {
-            color: #2c3e50;
+            color: #1e3a8a;
         }
         
         .info-row a {
-            color: #00ab44;
+            color: #3b82f6;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        /* PDF Print Styles */
+        /* PDF Print Styles - Premium Design Optimized */
+        @page {
+            size: A4;
+            margin: 10mm 12mm;
+        }
+        
         @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
             body {
                 margin: 0;
                 padding: 0;
-                font-size: 10pt;
+                font-size: 9pt;
                 line-height: 1.3;
+                color: #111827 !important;
             }
             
             .container {
                 max-width: none;
                 margin: 0;
-                padding: 15mm;
+                padding: 0;
                 min-height: auto;
             }
             
             .section {
                 break-inside: avoid;
+                margin-bottom: 10px;
             }
             
             .header {
                 break-after: avoid;
+                margin-bottom: 12px;
+                border-bottom: 3px solid #3b82f6 !important;
             }
             
             .project-card,
@@ -387,33 +438,75 @@
             }
             
             /* Ensure good page breaks */
-            h2 {
+            h1, h2, h3 {
                 break-after: avoid;
+                page-break-after: avoid;
             }
             
-            /* Adjust font sizes for print */
+            /* Optimize font sizes for print */
             .header-content h1 {
-                font-size: 24pt;
+                font-size: 20pt !important;
+                color: #1e3a8a !important;
             }
             
             .header-content .title {
-                font-size: 12pt;
+                font-size: 10pt !important;
             }
             
             .section h2 {
-                font-size: 14pt;
+                font-size: 12pt !important;
+                color: #1e3a8a !important;
+                background: none !important;
+                -webkit-text-fill-color: #1e3a8a !important;
+                border-bottom: 2px solid #ddd6fe !important;
             }
             
-            /* Hide interactive elements in print */
+            .contact-grid {
+                font-size: 8pt !important;
+            }
+            
+            .profile-image {
+                width: 65px !important;
+                height: 65px !important;
+                border: 2px solid #e2e8f0 !important;
+                box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15) !important;
+            }
+            
+            /* Link formatting for print */
             a {
-                color: #2c3e50 !important;
+                color: #3b82f6 !important;
                 text-decoration: none !important;
             }
             
-            .project-links a::after {
-                content: " (" attr(href) ")";
-                font-size: 7pt;
-                color: #95a5a6;
+            .project-links a:after {
+                content: "";
+                font-size: 0pt;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+            
+            /* Ensure color preservation */
+            .skill-category {
+                border-left: 4px solid #3b82f6 !important;
+                background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+            }
+            
+            .project-card {
+                border-left: 4px solid #3b82f6 !important;
+                background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+            }
+            
+            .project-tech {
+                background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+                color: #3b82f6 !important;
+            }
+            
+            .experience-item li:before {
+                color: #3b82f6 !important;
             }
         }
         
@@ -469,8 +562,8 @@
         <!-- Professional Summary -->
         <section class="section summary no-break">
             <h2>Professional Summary</h2>
-            <p>Senior Software Engineer with 3+ years of expertise delivering scalable web applications and enterprise solutions. <strong>Proven impact:</strong> 40% efficiency improvements, 99.9% system uptime, and 60% faster deployments through modern DevOps practices. Specialized in PHP (Laravel), Python (Flask/Django), JavaScript (Vue.js/Next.js) with extensive experience in microservices architecture, API development, and legacy system modernization. Led cross-functional teams across startup and enterprise environments, with expertise in cloud deployment (AWS/Azure) and comprehensive CI/CD implementation.</p>
-            <p>Strong background in database optimization, cloud deployment (AWS/Azure), and DevOps practices including CI/CD implementation. Experienced in both startup and enterprise environments with expertise in legacy system modernization, cross-functional team collaboration, and delivering solutions that serve 1000+ daily users.</p>
+            <p>Senior Software Engineer with 3+ years of expertise delivering scalable web applications and enterprise solutions. <strong>Proven impact:</strong> 40% efficiency improvements, 99.9% system uptime, and 60% faster deployments through modern DevOps practices. Specialized in PHP (Laravel), Python (Flask/Django), JavaScript (Vue.js/Next.js) with extensive experience in microservices architecture, API development, and legacy system modernization.</p>
+            <p>Led cross-functional teams across startup and enterprise environments, with expertise in cloud deployment (AWS/Azure), comprehensive CI/CD implementation, and delivering solutions serving 1000+ daily users. Strong background in database optimization, embedded systems development, and modern web technologies.</p>
         </section>
 
         <!-- Technical Skills -->
@@ -478,16 +571,16 @@
             <h2>Core Technical Skills</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Backend Development</h3>
-                    <p>PHP (Laravel), Python (Flask, Django), Node.js, RESTful APIs, Microservices Architecture</p>
+                    <h3>Languages & Frameworks</h3>
+                    <p>PHP (Laravel), JavaScript/TypeScript (React, Next.js, Vue.js), Python (Flask, Django), C/C++, Node.js</p>
                 </div>
                 <div class="skill-category">
-                    <h3>Frontend Development</h3>
-                    <p>JavaScript, TypeScript, Vue.js, Nuxt.js, Next.js, React, HTML5, CSS3, Tailwind CSS</p>
+                    <h3>Database & Infrastructure</h3>
+                    <p>MySQL, PostgreSQL, Oracle DB, AWS, Docker, CI/CD, RESTful APIs, Microservices</p>
                 </div>
                 <div class="skill-category">
-                    <h3>Database & Cloud</h3>
-                    <p>MySQL, PostgreSQL, Oracle, Database Optimization, AWS, Azure, Docker, CI/CD</p>
+                    <h3>Specialized Systems</h3>
+                    <p>Embedded Systems, POS Terminal Development, Payment Integration, Banking APIs, Real-time Processing</p>
                 </div>
             </div>
         </section>
@@ -503,10 +596,10 @@
                     <p class="duration">October 2022 - Present (2+ years)</p>
                 </div>
                 <ul>
-                    <li>Designed and developed microservices-based Reconciliation System using Python (Flask) and Electron.js, achieving 40% improvement in transaction processing efficiency</li>
-                    <li>Maintained and optimized legacy .NET banking applications (IMS), reducing system downtime by 25% through proactive performance enhancements</li>
-                    <li>Led full-stack Laravel applications deployment on IIS servers with 99.9% uptime, managing complete project lifecycles</li>
-                    <li>Implemented robust CI/CD pipelines, reducing deployment time by 60% and ensuring automated testing protocols</li>
+                    <li>Architected enterprise-grade microservices-based Reconciliation System using Python (Flask) and Electron.js, achieving 40% improvement in transaction processing efficiency handling 10,000+ daily transactions</li>
+                    <li>Led performance optimization of legacy .NET banking applications (IMS), reducing system downtime by 25% through proactive debugging and database query optimization</li>
+                    <li>Managed end-to-end delivery of 5+ Laravel-based enterprise applications, maintaining 99.9% uptime with zero critical incidents during production deployment</li>
+                    <li>Designed comprehensive CI/CD pipelines with automated testing, reducing deployment time by 60% and eliminating manual deployment errors</li>
                 </ul>
             </div>
             
@@ -517,10 +610,10 @@
                     <p class="duration">April 2022 - September 2022 (6 months)</p>
                 </div>
                 <ul>
-                    <li>Developed comprehensive hotel booking platform using Laravel and Tailwind CSS, serving 1000+ daily users</li>
-                    <li>Optimized MySQL database schemas achieving 30% performance improvement in booking operations</li>
-                    <li>Established code review processes and coding standards, reducing bug reports by 35%</li>
-                    <li>Collaborated with international UI/UX teams to deliver responsive, user-focused solutions</li>
+                    <li>Built comprehensive hotel booking platform using Laravel backend and modern JavaScript frontend, serving 1,000+ daily active users</li>
+                    <li>Optimized database architecture achieving 30% improvement in response times through strategic indexing and schema optimization</li>
+                    <li>Established code quality standards and led comprehensive code review processes, reducing production bug reports by 35%</li>
+                    <li>Collaborated with international UI/UX teams to deliver mobile-first, responsive solutions enhancing customer conversion rates</li>
                 </ul>
             </div>
         </section>
@@ -529,61 +622,62 @@
         <section class="section">
             <h2>Key Projects & Contributions</h2>
             <div class="projects-intro">
-                <a href="docs/projects/">Complete project documentation available in portfolio</a>
+                <a href="docs/projects/">38+ documented projects available in comprehensive portfolio</a>
             </div>
             
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3>SaaS E-commerce Platform</h3>
-                    <span class="project-tech">PHP, Laravel, MySQL</span>
-                    <p>Multi-tenant e-commerce backend with payment integration, inventory management, and scalable API design for high-performance operations.</p>
+                    <h3>Sharothee Wedding Platform</h3>
+                    <span class="project-tech">TypeScript, Next.js, React</span>
+                    <p>Comprehensive bilingual (English & Bengali) wedding website with RSVP management, photo galleries, live streaming, and real-time guest interactions. Features modern responsive design.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/syed-reza98/Sharothee-Wedding">GitHub</a>
+                        <a href="https://arvinwedsincia.com">Live Demo</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3>SR600Mini POS Terminal</h3>
+                    <span class="project-tech">C, C++, Embedded Systems</span>
+                    <p>Commercial POS firmware for dual-screen payment terminals with structured UI, transaction handling, and resource-aware display logic. 410MB enterprise-grade codebase.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/syed-reza98/SR600Mini">GitHub</a>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <h3>SaaS E-commerce Backend</h3>
+                    <span class="project-tech">Laravel, PHP, MySQL</span>
+                    <p>Multi-tenant e-commerce platform with payment integration, inventory management, and scalable API architecture for high-volume operations and admin dashboard.</p>
                     <div class="project-links">
                         <a href="https://github.com/syed-reza98/saas_ecom">GitHub</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <h3>Sharothee Wedding Platform</h3>
-                    <span class="project-tech">TypeScript, Next.js</span>
-                    <p>Full-stack event management system with RSVP handling, media galleries, and admin dashboard. Modern responsive design with real-time features.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/syed-reza98/Sharothee-Wedding">GitHub</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>SR600Mini POS Terminal</h3>
-                    <span class="project-tech">C, Embedded Systems</span>
-                    <p>Firmware for dual-screen POS device with structured UI, transaction handling, and resource-aware display logic optimized for hardware constraints.</p>
-                    <div class="project-links">
-                        <a href="docs/projects/sr600mini.md">Details</a>
-                    </div>
-                </div>
-                
-                <div class="project-card">
-                    <h3>NSU eKYC System</h3>
+                    <h3>NSU eKYC Verification System</h3>
                     <span class="project-tech">Laravel, MySQL, APIs</span>
-                    <p>Student verification system with API integrations for banks and hospitals. Secure document processing and comprehensive reporting features.</p>
+                    <p>Student identity verification platform with API integrations for banks and hospitals. Features secure document processing and comprehensive compliance reporting.</p>
                     <div class="project-links">
-                        <a href="docs/projects/nsu-ekyc.md">Details</a>
+                        <a href="https://github.com/syed-reza98/nsu_ekyc">GitHub</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <h3>Walkinroom Hotel System</h3>
-                    <span class="project-tech">Laravel, JavaScript</span>
-                    <p>Commercial hotel booking platform with advanced search, booking management, payment processing, and comprehensive admin features.</p>
+                    <h3>Digital Product Marketplace</h3>
+                    <span class="project-tech">PHP, Laravel, MySQL</span>
+                    <p>Full-featured digital marketplace with user management, payment processing, product catalog, sales analytics, and comprehensive administrative dashboard.</p>
                     <div class="project-links">
-                        <a href="docs/projects/walkinroom.md">Details</a>
+                        <a href="https://github.com/syed-reza98/digital_product_e-commerce">GitHub</a>
                     </div>
                 </div>
                 
                 <div class="project-card">
-                    <h3>Digital E-commerce Platform</h3>
-                    <span class="project-tech">PHP, MySQL</span>
-                    <p>Digital product marketplace with user management, payment integration, product catalog, and sales analytics dashboard.</p>
+                    <h3>GitHubReadTool Portfolio Generator</h3>
+                    <span class="project-tech">Node.js, JavaScript, GitHub API</span>
+                    <p>Automated portfolio generation system analyzing 38+ repositories, filtering meaningful contributions, and generating comprehensive project documentation with resume integration.</p>
                     <div class="project-links">
-                        <a href="docs/projects/digital-product-e-commerce.md">Details</a>
+                        <a href="https://github.com/syed-reza98/GitHubReadTool">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -631,26 +725,30 @@
 
         <!-- Professional Activities & Additional Information -->
         <section class="section">
-            <h2>Professional Activities & Additional Information</h2>
+            <h2>Additional Information</h2>
             
-            <div class="experience-item">
-                <div class="experience-header">
-                    <h3>Senior Member - ACM Student Chapter</h3>
-                    <p class="company">North South University Operations</p>
-                    <p class="duration">March 2018 - November 2021</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div>
+                    <div class="experience-item" style="margin-bottom: 10px;">
+                        <div class="experience-header">
+                            <h3>Senior Member - ACM Student Chapter</h3>
+                            <p class="company">North South University Operations</p>
+                            <p class="duration">March 2018 - November 2021</p>
+                        </div>
+                        <ul>
+                            <li>Organized technical events, workshops, and programming competitions for 200+ students</li>
+                            <li>Mentored junior students in programming and software development best practices</li>
+                        </ul>
+                    </div>
                 </div>
-                <ul>
-                    <li>Organized technical events, workshops, and programming competitions for 200+ students</li>
-                    <li>Mentored junior students in programming and software development best practices</li>
-                </ul>
-            </div>
-            
-            <div class="info-box">
-                <div class="info-row"><strong>Languages:</strong> English (Professional Working Proficiency), Bengali (Native)</div>
-                <div class="info-row"><strong>Technical Interests:</strong> System Architecture, Microservices, Machine Learning, Cloud Computing</div>
-                <div class="info-row"><strong>Portfolio:</strong> 30+ documented projects available at <a href="docs/projects/">docs/projects/</a></div>
-                <div class="info-row"><strong>GitHub Stats:</strong> Active contributor with comprehensive project portfolio and open-source contributions</div>
-                <div class="info-row"><strong>Availability:</strong> Open to senior software engineering opportunities in full-stack and backend development</div>
+                
+                <div class="info-box" style="margin-top: 0;">
+                    <div class="info-row"><strong>Languages:</strong> English (Professional), Bengali (Native)</div>
+                    <div class="info-row"><strong>Interests:</strong> System Architecture, Microservices, ML, Cloud Computing</div>
+                    <div class="info-row"><strong>Portfolio:</strong> 38+ projects at <a href="docs/projects/">docs/projects/</a></div>
+                    <div class="info-row"><strong>GitHub:</strong> Active contributor with comprehensive portfolio</div>
+                    <div class="info-row"><strong>Status:</strong> Open to senior software engineering opportunities</div>
+                </div>
             </div>
         </section>
     </div>
