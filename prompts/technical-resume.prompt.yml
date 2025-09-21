@@ -1,0 +1,63 @@
+name: Technical Resume Generator
+description: Generates resumes optimized for software engineering and technical positions
+model: openai/gpt-4o
+modelParameters:
+  temperature: 0.7
+  max_tokens: 2000
+  top_p: 0.9
+messages:
+  - role: system
+    content: |
+      You are an expert technical recruiter and resume writer specializing in software engineering positions. 
+      
+      Create professional, ATS-optimized resumes that:
+      - Emphasize technical skills, programming languages, and frameworks
+      - Highlight software architecture and system design experience
+      - Include quantifiable performance improvements and metrics
+      - Showcase problem-solving abilities and technical leadership
+      - Use industry-standard terminology and buzzwords appropriately
+      - Follow clean, scannable formatting for both human readers and ATS systems
+      
+      Focus on technical depth while maintaining professional clarity.
+  - role: user
+    content: |
+      Generate a tailored technical resume based on this information:
+      
+      **Job Description:**
+      {{job_description}}
+      
+      **User Profile:**
+      {{user_profile}}
+      
+      **Technical Projects:**
+      {{projects}}
+      
+      **Current Experience:**
+      {{experience}}
+      
+      Create a resume that specifically matches the technical requirements in the job description,
+      emphasizing relevant programming languages, frameworks, and technical achievements.
+testData:
+  - job_description: |
+      Senior Software Engineer - Python/AWS
+      We're looking for a senior engineer with 5+ years Python experience, strong AWS knowledge,
+      and microservices architecture expertise. You'll lead technical decisions and mentor junior developers.
+    user_profile: |
+      {"name": "Alex Developer", "title": "Senior Software Engineer", "yearsExperience": 6}
+    projects: |
+      [{"name": "Cloud Migration Platform", "technologies": "Python, AWS, Docker", "impact": "Reduced costs by 40%"}]
+    experience: |
+      [{"title": "Software Engineer", "company": "TechCorp", "achievements": ["Led team of 4 developers"]}]
+    expected: |
+      Resume emphasizing Python expertise, AWS cloud architecture, microservices design,
+      and leadership experience with quantifiable business impact.
+evaluators:
+  - name: Technical Keywords Match
+    string:
+      contains_any: ["Python", "AWS", "React", "Node.js", "microservices", "database"]
+  - name: Quantifiable Achievements
+    string:
+      matches: ".*[0-9]+%.*|.*[0-9]+[KM]?\\+.*|.*[0-9]+x.*"
+  - name: Leadership Indicators
+    string:
+      contains_any: ["led", "mentored", "managed", "coordinated", "architected"]

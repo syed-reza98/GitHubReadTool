@@ -80,7 +80,37 @@ export class GitHubModels {
       return this.generateMockResume(jobDescription, userProfile, projects);
     }
 
-    const systemPrompt = this.getSystemPrompt('resume_generation');
+    // Determine the best prompt template based on job description
+    const promptTemplate = this.selectPromptTemplate(jobDescription);
+    const prompt = await this.loadPromptTemplate(promptTemplate);
+
+    try {
+      const response = await this.makeRequest('/v1/completions', {
+        model: prompt.model || this.model,
+        prompt: this.buildPromptFromTemplate(prompt, {
+          job_description: jobDescription,
+          user_profile: JSON.stringify(userProfile, null, 2),
+          projects: JSON.stringify(projects, null, 2),
+          experience: this.formatExperience(userProfile.experience || [])
+        }),
+        temperature: prompt.modelParameters?.temperature || this.temperature,
+        max_tokens: prompt.modelParameters?.max_tokens || this.maxTokens
+      });
+
+      const result = this.parseResumeResponse(response);
+      
+      // Run evaluations if prompt includes them
+      if (prompt.evaluators && prompt.evaluators.length > 0) {
+        result.evaluations = await this.runPromptEvaluations(result, prompt.evaluators, { jobDescription, userProfile, projects });
+      }
+
+      return result;
+    } catch (error) {
+      console.error('Resume generation failed:', error.message);
+      // Fallback to mock generation
+      return this.generateMockResume(jobDescription, userProfile, projects);
+    }
+  }
     
     const prompt = `
 Job Description:
@@ -662,6 +692,409 @@ Be conversational but professional, and always focus on helping the user create 
   extractExperienceYears(jobDescription) {
     const yearMatch = jobDescription.match(/(\d+)\+?\s*years?/i);
     return yearMatch ? yearMatch[1] : '3';
+  }
+
+  /**
+   * Select appropriate prompt template based on job description analysis
+   */
+  selectPromptTemplate(jobDescription) {
+    const lowerDesc = jobDescription.toLowerCase();
+    
+    // Check for leadership/management keywords
+    const leadershipKeywords = ['manager', 'lead', 'director', 'head of', 'vp', 'cto', 'architect', 'principal'];
+    const hasLeadershipKeywords = leadershipKeywords.some(keyword => lowerDesc.includes(keyword));
+    
+    if (hasLeadershipKeywords) {
+      return 'leadership-resume';
+    }
+    
+    // Default to technical resume for most software engineering positions
+    return 'technical-resume';
+  }
+
+  /**
+   * Load prompt template from file system or cache
+   */
+  async loadPromptTemplate(templateName) {
+    try {
+      // In a full implementation, this would load from the prompts directory
+      // For now, return built-in templates
+      const templates = {
+        'technical-resume': {
+          name: 'Technical Resume Generator',
+          model: 'openai/gpt-4o',
+          modelParameters: {
+            temperature: 0.7,
+            max_tokens: 2000
+          },
+          messages: [
+            {
+              role: 'system',
+              content: `You are an expert technical recruiter and resume writer specializing in software engineering positions. 
+
+Create professional, ATS-optimized resumes that:
+- Emphasize technical skills, programming languages, and frameworks
+- Highlight software architecture and system design experience
+- Include quantifiable performance improvements and metrics
+- Showcase problem-solving abilities and technical leadership
+- Use industry-standard terminology appropriately
+- Follow clean, scannable formatting for both human readers and ATS systems
+
+Focus on technical depth while maintaining professional clarity.`
+            },
+            {
+              role: 'user',
+              content: `Generate a tailored technical resume based on this information:
+
+**Job Description:**
+{{job_description}}
+
+**User Profile:**
+{{user_profile}}
+
+**Technical Projects:**
+{{projects}}
+
+**Current Experience:**
+{{experience}}
+
+Create a resume that specifically matches the technical requirements in the job description,
+emphasizing relevant programming languages, frameworks, and technical achievements.`
+            }
+          ],
+          evaluators: [
+            { name: 'Technical Keywords Match', type: 'keyword_match' },
+            { name: 'Quantifiable Achievements', type: 'metrics_present' },
+            { name: 'ATS Compatibility', type: 'ats_score' }
+          ]
+        },
+        'leadership-resume': {
+          name: 'Leadership Resume Generator',
+          model: 'openai/gpt-4o',
+          modelParameters: {
+            temperature: 0.6,
+            max_tokens: 2000
+          },
+          messages: [
+            {
+              role: 'system',
+              content: `You are a senior executive recruiter specializing in technical leadership positions.
+
+Create executive-level resumes that showcase:
+- Strategic thinking and business impact
+- Team management and organizational leadership
+- Cross-functional collaboration and stakeholder management
+- Process improvement and change management
+- Technical vision and architecture decisions
+- Budget management and resource allocation
+- Mentoring and talent development
+
+Emphasize leadership outcomes, business metrics, and transformational results.`
+            },
+            {
+              role: 'user',
+              content: `Generate a leadership-focused resume based on this information:
+
+**Job Description:**
+{{job_description}}
+
+**Leadership Profile:**
+{{user_profile}}
+
+**Team Management Experience:**
+{{experience}}
+
+**Strategic Initiatives:**
+{{projects}}
+
+Create a resume that demonstrates executive presence and strategic leadership capabilities.`
+            }
+          ],
+          evaluators: [
+            { name: 'Leadership Keywords', type: 'leadership_indicators' },
+            { name: 'Business Impact Metrics', type: 'business_metrics' },
+            { name: 'Team Management Evidence', type: 'team_indicators' }
+          ]
+        }
+      };
+      
+      return templates[templateName] || templates['technical-resume'];
+    } catch (error) {
+      console.error('Failed to load prompt template:', error);
+      return this.getFallbackTemplate();
+    }
+  }
+
+  /**
+   * Build prompt from template with variable substitution
+   */
+  buildPromptFromTemplate(template, variables) {
+    let prompt = template.messages.map(msg => msg.content).join('\n\n');
+    
+    // Replace template variables
+    Object.entries(variables).forEach(([key, value]) => {
+      const placeholder = new RegExp(`\\{\\{${key}\\}\\}`, 'g');
+      prompt = prompt.replace(placeholder, value);
+    });
+    
+    return prompt;
+  }
+
+  /**
+   * Format experience data for prompt templates
+   */
+  formatExperience(experience) {
+    if (!Array.isArray(experience)) return '[]';
+    
+    return JSON.stringify(experience.map(exp => ({
+      title: exp.title,
+      company: exp.company,
+      duration: exp.duration,
+      achievements: exp.achievements || []
+    })), null, 2);
+  }
+
+  /**
+   * Run evaluations based on prompt template evaluators
+   */
+  async runPromptEvaluations(resume, evaluators, context) {
+    const results = {};
+    
+    for (const evaluator of evaluators) {
+      try {
+        switch (evaluator.type) {
+          case 'keyword_match':
+            results[evaluator.name] = await this.evaluateKeywordMatch(resume, context.jobDescription);
+            break;
+          case 'metrics_present':
+            results[evaluator.name] = await this.evaluateMetricsPresent(resume);
+            break;
+          case 'ats_score':
+            results[evaluator.name] = await this.evaluateATSScore(resume);
+            break;
+          case 'leadership_indicators':
+            results[evaluator.name] = await this.evaluateLeadershipIndicators(resume);
+            break;
+          case 'business_metrics':
+            results[evaluator.name] = await this.evaluateBusinessMetrics(resume);
+            break;
+          case 'team_indicators':
+            results[evaluator.name] = await this.evaluateTeamIndicators(resume);
+            break;
+          default:
+            results[evaluator.name] = { score: 0.5, note: 'Evaluator not implemented' };
+        }
+      } catch (error) {
+        console.error(`Evaluation failed for ${evaluator.name}:`, error);
+        results[evaluator.name] = { score: 0, error: error.message };
+      }
+    }
+    
+    return results;
+  }
+
+  /**
+   * Evaluate keyword match between resume and job description
+   */
+  async evaluateKeywordMatch(resume, jobDescription) {
+    const resumeText = this.extractTextFromResume(resume);
+    const jobKeywords = this.extractTechnicalKeywords(jobDescription);
+    const resumeKeywords = this.extractTechnicalKeywords(resumeText);
+    
+    const matchedKeywords = jobKeywords.filter(keyword => 
+      resumeKeywords.some(rKeyword => rKeyword.toLowerCase() === keyword.toLowerCase())
+    );
+    
+    const score = jobKeywords.length > 0 ? matchedKeywords.length / jobKeywords.length : 1;
+    
+    return {
+      score,
+      description: `Matched ${matchedKeywords.length}/${jobKeywords.length} key technical terms`,
+      matchedKeywords,
+      missedKeywords: jobKeywords.filter(k => !matchedKeywords.includes(k)),
+      threshold: score > 0.6 ? 'PASS' : 'REVIEW'
+    };
+  }
+
+  /**
+   * Evaluate presence of quantifiable metrics
+   */
+  async evaluateMetricsPresent(resume) {
+    const text = this.extractTextFromResume(resume);
+    const metricsPatterns = [
+      /\d+%/g,                    // Percentages
+      /\d+[KM]?\+/g,             // Numbers with K/M suffix
+      /\$\d+[KMB]?/g,            // Dollar amounts
+      /\d+x/g,                   // Multipliers
+      /\d+\s*(users?|customers?|projects?|team|developers?|engineers?)/gi
+    ];
+    
+    const foundMetrics = [];
+    metricsPatterns.forEach(pattern => {
+      const matches = text.match(pattern);
+      if (matches) foundMetrics.push(...matches);
+    });
+    
+    const score = Math.min(foundMetrics.length / 5, 1); // Expect at least 5 metrics
+    
+    return {
+      score,
+      description: `Found ${foundMetrics.length} quantifiable metrics`,
+      metrics: foundMetrics,
+      threshold: score > 0.4 ? 'PASS' : 'REVIEW'
+    };
+  }
+
+  /**
+   * Evaluate ATS compatibility
+   */
+  async evaluateATSScore(resume) {
+    const text = this.extractTextFromResume(resume);
+    
+    const checks = {
+      hasStandardSections: this.hasStandardSections(resume),
+      hasQuantifiableResults: /\d+%|\d+[KM]?\+|\$\d+/.test(text),
+      avoidComplexFormatting: this.hasSimpleFormatting(text),
+      hasRelevantKeywords: text.split(/\s+/).length > 200,
+      usesActionVerbs: this.hasActionVerbs(text),
+      properContactInfo: this.hasProperContactInfo(resume)
+    };
+    
+    const passedChecks = Object.values(checks).filter(Boolean).length;
+    const totalChecks = Object.keys(checks).length;
+    const score = passedChecks / totalChecks;
+    
+    return {
+      score,
+      description: `Passed ${passedChecks}/${totalChecks} ATS compatibility checks`,
+      checks,
+      threshold: score > 0.8 ? 'PASS' : 'REVIEW'
+    };
+  }
+
+  /**
+   * Extract technical keywords from text
+   */
+  extractTechnicalKeywords(text) {
+    const technicalTerms = [
+      // Programming Languages
+      'JavaScript', 'TypeScript', 'Python', 'Java', 'C#', 'C++', 'PHP', 'Ruby', 'Go', 'Rust', 'Swift', 'Kotlin',
+      // Frontend Frameworks
+      'React', 'Vue.js', 'Angular', 'Svelte', 'Next.js', 'Nuxt.js',
+      // Backend Frameworks
+      'Node.js', 'Express.js', 'Django', 'Flask', 'Spring Boot', 'Laravel', 'Ruby on Rails',
+      // Cloud Platforms
+      'AWS', 'Azure', 'GCP', 'Google Cloud', 'Digital Ocean', 'Heroku',
+      // Databases
+      'MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch', 'DynamoDB',
+      // DevOps Tools
+      'Docker', 'Kubernetes', 'Jenkins', 'GitLab CI', 'GitHub Actions', 'Terraform',
+      // Methodologies
+      'Agile', 'Scrum', 'Kanban', 'TDD', 'BDD', 'CI/CD', 'microservices', 'REST API', 'GraphQL'
+    ];
+    
+    return technicalTerms.filter(term => 
+      new RegExp(`\\b${term}\\b`, 'i').test(text)
+    );
+  }
+
+  /**
+   * Extract text content from resume object
+   */
+  extractTextFromResume(resume) {
+    if (typeof resume === 'string') return resume;
+    
+    let text = '';
+    
+    if (resume.summary) text += resume.summary + ' ';
+    if (resume.personalInfo) {
+      text += Object.values(resume.personalInfo).join(' ') + ' ';
+    }
+    if (resume.skills) {
+      if (typeof resume.skills === 'object') {
+        text += Object.values(resume.skills).flat().join(' ') + ' ';
+      } else {
+        text += resume.skills + ' ';
+      }
+    }
+    if (resume.experience) {
+      resume.experience.forEach(exp => {
+        text += (exp.title || '') + ' ';
+        text += (exp.company || '') + ' ';
+        if (exp.achievements) {
+          text += exp.achievements.join(' ') + ' ';
+        }
+      });
+    }
+    if (resume.projects) {
+      resume.projects.forEach(proj => {
+        text += (proj.name || '') + ' ';
+        text += (proj.description || '') + ' ';
+        text += (proj.technologies || '') + ' ';
+      });
+    }
+    
+    return text;
+  }
+
+  /**
+   * Check if resume has standard sections
+   */
+  hasStandardSections(resume) {
+    const requiredSections = ['personalInfo', 'summary', 'skills', 'experience'];
+    return requiredSections.every(section => resume[section]);
+  }
+
+  /**
+   * Check for simple formatting (ATS-friendly)
+   */
+  hasSimpleFormatting(text) {
+    // Check for complex characters that ATS might struggle with
+    const complexChars = /[│▌█▲▼◆●]/;
+    return !complexChars.test(text);
+  }
+
+  /**
+   * Check for action verbs
+   */
+  hasActionVerbs(text) {
+    const actionVerbs = [
+      'developed', 'implemented', 'designed', 'created', 'built', 'managed', 'led',
+      'improved', 'optimized', 'reduced', 'increased', 'achieved', 'delivered',
+      'architected', 'collaborated', 'mentored', 'coordinated'
+    ];
+    
+    return actionVerbs.some(verb => 
+      new RegExp(`\\b${verb}`, 'i').test(text)
+    );
+  }
+
+  /**
+   * Check for proper contact information
+   */
+  hasProperContactInfo(resume) {
+    const info = resume.personalInfo || {};
+    return info.name && (info.email || info.phone);
+  }
+
+  /**
+   * Get fallback template for error cases
+   */
+  getFallbackTemplate() {
+    return {
+      name: 'Fallback Template',
+      model: this.model,
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a professional resume writer. Create a well-structured resume based on the provided information.'
+        },
+        {
+          role: 'user',
+          content: 'Create a professional resume for: {{job_description}}'
+        }
+      ]
+    };
   }
 }
 
