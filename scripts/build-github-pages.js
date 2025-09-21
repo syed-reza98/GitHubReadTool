@@ -114,15 +114,15 @@ console.log('🤖 Creating AI-powered resume builder for GitHub Pages...');
 const originalHtml = fs.readFileSync(path.join(projectRoot, 'interactive-resume-builder.html'), 'utf8');
 
 // Extract environment variables
-const modelsApiToken = process.env.MODELS_API_TOKEN || '';
-const githubToken = process.env.GITHUB_TOKEN || '';
+const modelsApiToken = process.env.GITHUB_TOKEN || '';
+const githubRepoToken = process.env.GITHUB_REPO_TOKEN || process.env.GITHUB_TOKEN || '';
 
 if (!modelsApiToken) {
-    console.warn('⚠️  MODELS_API_TOKEN not found in environment variables');
+    console.warn('⚠️  GITHUB_TOKEN not found in environment variables');
 }
 
-if (!githubToken) {
-    console.warn('⚠️  GITHUB_TOKEN not found in environment variables');
+if (!githubRepoToken) {
+    console.warn('⚠️  GITHUB_REPO_TOKEN not found in environment variables');
 }
 
 // Create modified HTML with embedded AI service and project data
@@ -134,8 +134,8 @@ const modifiedHtml = originalHtml.replace(
         // GitHub Models API service for direct browser integration
         const GITHUB_MODELS_CONFIG = {
             token: '${modelsApiToken}',
-            endpoint: 'https://models.inference.ai.azure.com',
-            model: 'gpt-4o-mini',
+            endpoint: 'https://models.github.ai',
+            model: 'openai/gpt-4o-mini',
             enabled: ${!!modelsApiToken}
         };
         
@@ -323,13 +323,13 @@ console.log('  - *.pdf (resume templates)');
 if (modelsApiToken) {
     console.log('🤖 Real AI integration: ENABLED');
 } else {
-    console.log('⚠️  Real AI integration: DISABLED (MODELS_API_TOKEN not found)');
+    console.log('⚠️  Real AI integration: DISABLED (GITHUB_TOKEN not found)');
 }
 
-if (githubToken) {
+if (githubRepoToken) {
     console.log('📊 Project data integration: ENABLED');
 } else {
-    console.log('⚠️  Project data integration: LIMITED (GITHUB_TOKEN not found)');
+    console.log('⚠️  Project data integration: LIMITED (GITHUB_REPO_TOKEN not found)');
 }
 
 console.log('\n🌐 Ready for GitHub Pages deployment!');

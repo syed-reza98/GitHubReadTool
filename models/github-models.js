@@ -15,16 +15,21 @@ const __dirname = path.dirname(__filename);
 
 export class GitHubModels {
   constructor(options = {}) {
-    this.token = options.token || process.env.GITHUB_MODELS_TOKEN;
-    this.model = options.model || process.env.DEFAULT_MODEL || 'gpt-4';
-    this.endpoint = options.endpoint || process.env.MODEL_ENDPOINT || 'https://models.inference.ai.azure.com';
+    // Use GITHUB_TOKEN for GitHub Models API as per official documentation
+    this.token = options.token || process.env.GITHUB_TOKEN;
+    this.model = options.model || process.env.DEFAULT_MODEL || 'openai/gpt-4o-mini';
+    this.endpoint = options.endpoint || process.env.MODEL_ENDPOINT || 'https://models.github.ai';
     this.temperature = options.temperature || 0.7;
     this.maxTokens = options.maxTokens || 2000;
     this.demoMode = !this.token || options.demoMode;
     
     if (this.demoMode) {
       console.log('⚠️  Running in demo mode - AI features will use mock responses');
-      console.log('   Set GITHUB_MODELS_TOKEN to enable real AI integration');
+      console.log('   Set GITHUB_TOKEN to enable real AI integration');
+    } else {
+      console.log('✅ GitHub Models API configured successfully');
+      console.log(`   Model: ${this.model}`);
+      console.log(`   Endpoint: ${this.endpoint}`);
     }
   }
 

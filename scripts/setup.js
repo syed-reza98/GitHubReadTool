@@ -63,12 +63,14 @@ class SetupWizard {
     const envTemplate = `# GitHubReadTool Resume Builder Configuration
 
 # GitHub Models API Configuration (Required for AI features)
-GITHUB_MODELS_TOKEN=your_github_models_token_here
-MODEL_ENDPOINT=https://models.inference.ai.azure.com
-DEFAULT_MODEL=gpt-4
-
-# GitHub API Configuration (Required for project data)
+# Using GITHUB_TOKEN as per GitHub Models official documentation
 GITHUB_TOKEN=your_github_token_here
+MODEL_ENDPOINT=https://models.github.ai
+DEFAULT_MODEL=openai/gpt-4o-mini
+
+# GitHub Repository API Configuration (Required for project data)
+# Note: Using same token for both Models and Repository API access  
+GITHUB_REPO_TOKEN=your_github_token_here
 
 # Server Configuration
 PORT=3000
@@ -155,18 +157,18 @@ MAX_TOKENS=2000
     if (fs.existsSync(this.envPath)) {
       const envContent = fs.readFileSync(this.envPath, 'utf8');
       
-      const hasGithubModelsToken = !envContent.includes('GITHUB_MODELS_TOKEN=your_github_models_token_here');
-      const hasGithubToken = !envContent.includes('GITHUB_TOKEN=your_github_token_here');
+      const hasGithubModelsToken = !envContent.includes('GITHUB_TOKEN=your_github_token_here');
+      const hasGithubRepoToken = !envContent.includes('GITHUB_REPO_TOKEN=your_github_token_here');
 
       if (!hasGithubModelsToken) {
         console.log('⚠️  GitHub Models token not configured - AI features will not work');
       }
       
-      if (!hasGithubToken) {
-        console.log('⚠️  GitHub token not configured - project data may be limited');
+      if (!hasGithubRepoToken) {
+        console.log('⚠️  GitHub Repository token not configured - project data may be limited');
       }
 
-      if (hasGithubModelsToken && hasGithubToken) {
+      if (hasGithubModelsToken && hasGithubRepoToken) {
         console.log('✅ Environment tokens configured');
       }
     }

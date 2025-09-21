@@ -125,8 +125,8 @@ class ResumeBuilderServer {
     
     // Log configuration status
     console.log('🔧 Configuration:');
-    console.log(`  GitHub API Token: ${process.env.GITHUB_TOKEN ? '✅ Configured' : '❌ Missing'}`);
-    console.log(`  GitHub Models Token: ${process.env.GITHUB_MODELS_TOKEN ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`  GitHub Repository Token: ${(process.env.GITHUB_REPO_TOKEN || process.env.GITHUB_TOKEN) ? '✅ Configured' : '❌ Missing'}`);
+    console.log(`  GitHub Models Token: ${process.env.GITHUB_TOKEN ? '✅ Configured' : '❌ Missing'}`);
     console.log(`  Demo Mode: ${this.githubModels.demoMode ? '⚠️  Enabled' : '✅ Disabled'}`);
   }
 
@@ -286,8 +286,8 @@ class ResumeBuilderServer {
     try {
       // Check GitHub API connectivity
       const response = await fetch('https://api.github.com/zen', {
-        headers: process.env.GITHUB_TOKEN ? {
-          'Authorization': `token ${process.env.GITHUB_TOKEN}`
+        headers: (process.env.GITHUB_REPO_TOKEN || process.env.GITHUB_TOKEN) ? {
+          'Authorization': `token ${process.env.GITHUB_REPO_TOKEN || process.env.GITHUB_TOKEN}`
         } : {}
       });
       
@@ -598,7 +598,7 @@ class ResumeBuilderServer {
     <div class="feature">
         <h3>📖 Quick Start</h3>
         <ol>
-            <li>Set your <code>GITHUB_MODELS_TOKEN</code> environment variable</li>
+            <li>Set your <code>GITHUB_TOKEN</code> environment variable</li>
             <li>Click "Open Resume Builder" above</li>
             <li>Paste in a job description and generate your tailored resume</li>
             <li>Use the chat interface to refine and improve the content</li>
