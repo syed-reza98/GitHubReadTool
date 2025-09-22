@@ -202,8 +202,97 @@ const modifiedHtml = originalHtml.replace(
     `// Always available in GitHub Pages mode with real AI
             return API_CONFIG.useRealAI;`
 ).replace(
-    'showStatusMessage(\'Generating resume using demo mode...\', \'info\');',
-    `showStatusMessage(API_CONFIG.useRealAI ? 'Generating resume using GitHub Models AI...' : 'Generating resume using demo mode...', 'info');`
+    // Replace specific API endpoint calls with client-side implementations
+    'const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.generateResume}`, {',
+    `// Use GitHub Models API directly for GitHub Pages
+                        const prompt = \`Generate a professional resume for this job:
+Job Title: \${jobTitle}
+Company: \${elements.companyName?.value?.trim() || 'Target Company'}
+Job Description: \${jobDescription}
+
+Use this professional profile:
+Name: Syed Salman Reza
+Email: syedsalmanreza98@gmail.com
+Phone: +880 1755 607998
+Location: Dhaka, Bangladesh
+GitHub: https://github.com/syed-reza98
+
+Available projects: \${EMBEDDED_PROJECTS.map(p => p.name + ' - ' + p.description).join(', ')}
+
+Generate a JSON resume with sections: personalInfo, summary, skills, projects, experience.\`;
+
+                        const response = await fetch(GITHUB_MODELS_CONFIG.endpoint + '/chat/completions', {`
+).replace(
+    // Replace the request body for the API call
+    'body: JSON.stringify({\n                            jobTitle,\n                            jobDescription,\n                            companyName: elements.companyName?.value?.trim() || \'\'\n                        })',
+    `body: JSON.stringify({
+                            model: GITHUB_MODELS_CONFIG.model,
+                            messages: [{
+                                role: 'user',
+                                content: prompt
+                            }],
+                            temperature: 0.7,
+                            max_tokens: 2000
+                        })`
+).replace(
+    // Replace the response handling
+    'if (response.ok) {\n                        const data = await response.json();\n                        currentResume = data.data.resume;\n                        showStatusMessage(\'Resume generated using AI!\', \'success\');',
+    `if (response.ok) {
+                        const data = await response.json();
+                        const aiResponse = data.choices[0].message.content;
+                        
+                        // Try to parse AI response as JSON
+                        try {
+                            const jsonMatch = aiResponse.match(/\\{[\\s\\S]*\\}/);
+                            if (jsonMatch) {
+                                currentResume = JSON.parse(jsonMatch[0]);
+                                showStatusMessage('Resume generated using GitHub Models AI!', 'success');
+                            } else {
+                                throw new Error('No JSON found in response');
+                            }
+                        } catch (parseError) {
+                            console.warn('Failed to parse AI response, using enhanced mock');
+                            currentResume = generateEnhancedMockResume(jobTitle, jobDescription);
+                            showStatusMessage('Resume generated using enhanced templates!', 'success');
+                        }`
+).replace(
+    // Replace authorization header for the new endpoints (but not the existing callGitHubModelsAPI function)
+    'headers: {\n                            \'Content-Type\': \'application/json\'\n                        },',
+    `headers: {
+                            'Authorization': \`Bearer \${GITHUB_MODELS_CONFIG.token}\`,
+                            'Content-Type': 'application/json'
+                        },`
+).replace(
+    // Replace chat API endpoint call
+    'const response = await fetch(`${API_CONFIG.baseURL}${API_CONFIG.endpoints.chatMessage}`, {',
+    `// Use GitHub Models API directly for chat
+                        const chatPrompt = \`Current resume: \${JSON.stringify(currentResume, null, 2)}
+                        
+User instruction: \${message}
+
+Provide a helpful response and suggest specific improvements. If the instruction requires resume changes, explain what would be modified.\`;
+
+                        const response = await fetch(GITHUB_MODELS_CONFIG.endpoint + '/chat/completions', {`
+).replace(
+    // Replace chat request body
+    'body: JSON.stringify({\n                            message,\n                            resume: currentResume,\n                            conversationHistory\n                        })',
+    `body: JSON.stringify({
+                            model: GITHUB_MODELS_CONFIG.model,
+                            messages: [{
+                                role: 'user',
+                                content: chatPrompt
+                            }],
+                            temperature: 0.8,
+                            max_tokens: 1000
+                        })`
+).replace(
+    // Replace chat response handling
+    'if (response.ok) {\n                        const data = await response.json();\n                        addChatMessage(\'assistant\', data.response || \'I\\\'ve processed your request.\');\n                        \n                        if (data.updatedResume) {\n                            currentResume = data.updatedResume;\n                            displayResume(currentResume);\n                            showStatusMessage(\'Resume updated using AI!\', \'success\');\n                        }',
+    `if (response.ok) {
+                        const data = await response.json();
+                        const aiResponse = data.choices[0].message.content;
+                        addChatMessage('assistant', aiResponse);
+                        showStatusMessage('Response generated using GitHub Models AI!', 'success');`
 ).replace(
     'currentResume = generateMockResume(jobTitle, jobDescription);',
     `if (API_CONFIG.useRealAI) {
@@ -310,6 +399,10 @@ Provide a helpful response and suggest specific improvements. If the instruction
                 } else if (apiAvailable) {
                     // Use real API
                     addChatMessage('system', 'Processing your request with AI...');`
+).replace(
+    // Fix the fallback error handler to use the correct function name
+    'currentResume = generateMockResume(jobTitle, jobDescription);',
+    'currentResume = generateEnhancedMockResume(jobTitle, jobDescription);'
 );
 
 // Write the modified HTML
