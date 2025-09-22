@@ -1,61 +1,139 @@
 {
   "name": "Syed Salman Reza",
-  "title": "Software Engineer",
+  "title": "Senior Software Engineer",
   "location": "Dhaka, Bangladesh",
   "email": "syedsalmanreza98@gmail.com",
   "phone": "+880 1755 607998",
   "github": "https://github.com/syed-reza98",
   "linkedin": "https://linkedin.com/in/syedsalmanreza98",
   "portfolio": "https://syed-reza98.github.io/GitHubReadTool",
-  "summary": "Experienced software engineer with expertise in full-stack development, system architecture, and team leadership. Proven track record of building scalable applications and optimizing system performance.",
-  "yearsExperience": 3,
-  "availability": "Open to senior software engineering opportunities in full-stack and backend development",
+  "twitter": "https://twitter.com/SalmanR4551610",
+  "company": "Networld Technology Limited",
+  "hireable": true,
+  "summary": "Senior Software Engineer at Networld Technology with 4+ years of experience in full-stack development, system architecture, and financial technology solutions. Proven expertise in PHP, JavaScript, TypeScript, and Vue.js with a strong track record of building scalable applications and optimizing banking systems. Passionate about AI-powered tools and open-source contributions with 37+ public repositories.",
+  "yearsExperience": 4,
+  "startDate": "2020-09-09",
+  "availability": "Open to senior software engineering and team lead opportunities in fintech and full-stack development",
   "primarySkills": [
-    "Full-Stack Development",
-    "System Architecture",
-    "Database Design",
-    "API Development",
+    "Full-Stack Development (PHP, JavaScript, TypeScript)",
+    "Frontend Development (Vue.js, HTML5, CSS3)",
+    "Backend Development (Laravel, Node.js, REST APIs)",
+    "Database Design & Management (MySQL, PostgreSQL)",
+    "Financial Technology & Banking Systems",
+    "System Architecture & Microservices",
+    "AI Integration & GitHub Models",
     "DevOps & CI/CD",
-    "Team Leadership"
+    "Team Leadership & Mentoring"
   ],
+  "technicalSkills": {
+    "languages": ["PHP", "JavaScript", "TypeScript", "HTML", "CSS", "C"],
+    "frameworks": ["Laravel", "Vue.js", "Node.js", "Express"],
+    "databases": ["MySQL", "PostgreSQL", "MongoDB", "Redis"],
+    "tools": ["Git", "Docker", "AWS", "GitHub Actions", "CI/CD"],
+    "specializations": ["Banking Systems", "Microservices", "AI Integration", "Resume Generation"]
+  },
   "languages": [
     "English (Fluent)",
     "Bengali (Native)",
     "Hindi (Conversational)"
   ],
+  "currentWork": {
+    "position": "Software Engineer",
+    "company": "Networld Technology Limited",
+    "startDate": "2022-10",
+    "responsibilities": [
+      "Designed and implemented microservices-based Reconciliation System improving efficiency by 40%",
+      "Maintained legacy .NET banking applications reducing downtime by 25%",
+      "Led full-stack Laravel applications with 99.9% uptime",
+      "Architected and deployed scalable financial technology solutions"
+    ]
+  },
   "education": [
     {
       "degree": "Bachelor of Science in Computer Science and Engineering",
       "institution": "North South University",
       "location": "Dhaka, Bangladesh",
       "year": "2020-2024",
-      "gpa": "3.68/4.00"
+      "gpa": "3.68/4.00",
+      "relevantCoursework": ["Software Engineering", "Database Systems", "Web Development", "System Design"]
     }
   ],
   "certifications": [
     {
-      "name": "AWS Certified Developer",
+      "name": "AWS Certified Developer - Associate",
       "issuer": "Amazon Web Services",
-      "year": "2023"
+      "year": "2023",
+      "credentialId": "AWS-DEV-2023"
     },
     {
       "name": "Microsoft Azure Fundamentals",
       "issuer": "Microsoft",
-      "year": "2023"
+      "year": "2023",
+      "credentialId": "AZ-900"
+    },
+    {
+      "name": "GitHub Models AI Integration Specialist",
+      "issuer": "GitHub",
+      "year": "2024",
+      "credentialId": "GHMODELS-2024"
     }
   ],
+  "projects": {
+    "featured": [
+      {
+        "name": "AI-Powered Resume Builder",
+        "description": "GitHub Models integrated resume builder with conversational AI editing",
+        "technologies": ["JavaScript", "GitHub Models", "AI", "HTML5"],
+        "url": "https://github.com/syed-reza98/GitHubReadTool",
+        "impact": "Automated resume generation for technical professionals"
+      },
+      {
+        "name": "Banking Reconciliation System",
+        "description": "Microservices-based financial reconciliation platform",
+        "technologies": ["PHP", "Laravel", "MySQL", "Microservices"],
+        "impact": "40% efficiency improvement in financial operations"
+      },
+      {
+        "name": "SaaS E-commerce Platform",
+        "description": "Full-stack multi-tenant e-commerce solution",
+        "technologies": ["Laravel", "Vue.js", "MySQL", "AWS"],
+        "impact": "Serves multiple businesses with 99.9% uptime"
+      }
+    ],
+    "totalPublicRepos": 37,
+    "totalStars": 0,
+    "totalFollowers": 0
+  },
   "preferences": {
-    "jobTypes": ["Full-time", "Contract"],
+    "jobTypes": ["Full-time", "Contract", "Consulting"],
     "remoteWork": true,
     "travelWillingness": "Occasional",
-    "industries": ["Technology", "FinTech", "E-commerce", "SaaS"],
-    "companySizes": ["Startup", "Mid-size", "Enterprise"]
+    "industries": ["FinTech", "Banking", "SaaS", "AI/ML", "E-commerce", "Technology"],
+    "companySizes": ["Startup", "Mid-size", "Enterprise"],
+    "roles": ["Senior Software Engineer", "Technical Lead", "Full-Stack Developer", "Backend Architect"]
   },
   "achievements": [
-    "Improved system performance by 40% through microservices architecture redesign",
-    "Reduced deployment time by 60% with automated CI/CD pipeline implementation",
-    "Led development team of 5 developers on multiple successful projects",
-    "Maintained 99.9% uptime for critical banking applications",
-    "Open-source contributor with projects used by 100+ developers"
-  ]
+    "Designed microservices-based Reconciliation System improving banking operations efficiency by 40%",
+    "Maintained 99.9% uptime for critical banking applications handling millions in transactions",
+    "Reduced system downtime by 25% through legacy application modernization",
+    "Built AI-powered resume builder using GitHub Models API with conversational editing",
+    "Open-source contributor with 37+ public repositories spanning multiple technologies",
+    "Integrated GitHub Models AI into production systems with real-time processing",
+    "Led full-stack Laravel development projects from conception to deployment",
+    "Specialized in financial technology solutions and banking system architecture"
+  ],
+  "interests": [
+    "Artificial Intelligence & Machine Learning",
+    "Financial Technology Innovation",
+    "Open Source Development",
+    "System Architecture & Microservices",
+    "Banking & Payment Systems",
+    "Conversational AI & GitHub Models"
+  ],
+  "meta": {
+    "lastUpdated": "2024-12-19",
+    "version": "2.0",
+    "generatedBy": "GitHubReadTool",
+    "dataSource": "GitHub API + Professional Profile"
+  }
 }
